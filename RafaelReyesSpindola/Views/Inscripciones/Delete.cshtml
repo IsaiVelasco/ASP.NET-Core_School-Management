@@ -1,0 +1,63 @@
+﻿@model RafaelReyesSpindola.Models.Inscripcion
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div>
+    <div class="col-md-12">
+        <h1>Eliminar</h1>
+        <button type="button" class="btn btn-outline-dark btn-sm" OnClick="javascript: return history.back()" style="float: right">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+        </button>
+        <h3>¿Estás seguro que quieres elimitar esto?</h3>
+    </div>
+    <hr />
+    <div class="col-md-12 justify-content-center">
+        <div class="container shadow-sm" style="padding: 40px; border: 1px solid #DC3545;">
+
+            <div style="background-color: #FACFD0;
+                        padding: 5px; padding-bottom: 5px;
+                        padding-top: 10px;
+                        margin-bottom: -5px;">
+                <h5>INSCRIPCIÓN A ELIMINAR</h5>
+            </div>
+            <hr style="height: 2px; background-color: #DC3545" />
+            <table class="table table-hover table-sm table-borderless table-striped">
+
+                <tbody>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.FechaInscripcion):</th>
+                        <td>@Html.DisplayFor(model => model.FechaInscripcion)</td>
+                        <th>@Html.DisplayNameFor(model => model.Folio):</th>
+                        <td>@Html.DisplayFor(model => model.Folio)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Estudiante):</th>
+                        <td colspan="3">@Html.DisplayFor(model => model.Estudiante.NombreMatricula)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.CicloEscolar):</th>
+                        <td colspan="3">@Html.DisplayFor(model => model.CicloEscolar.CicloCompleto)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Grado):</th>
+                        <td>@Html.DisplayFor(model => model.Grado.Nombre) años</td>
+                        <th>@Html.DisplayNameFor(model => model.Grupo):</th>
+                        <td>@Html.DisplayFor(model => model.Grupo.NombreGrupo)</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <hr />
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="ID" />
+                <input type="submit" value="Eliminar" class="btn btn-danger" style="float:right;" />
+                <a asp-action="Index">Ir al listado de inscripciones</a>
+            </form>
+        </div>
+    </div>
+</div>

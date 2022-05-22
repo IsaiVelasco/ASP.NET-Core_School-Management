@@ -1,0 +1,100 @@
+﻿@model RafaelReyesSpindola.Models.SchoolViewModels.ScheduleWithLines
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Horario</h4>
+    <div>
+        <strong>Grupo: </strong> @Html.DisplayFor(g => Model.Horario.Grupo.GradoYGrupo)
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col">
+        <a class="btn btn-outline-dark btn-sm" asp-area="" asp-controller="FilasHorarios" asp-action="Create" asp-route-id="@Model.Horario.ID" style="float: left;">
+            <i class="fas fa-clock"></i>
+            Añadir Fila
+        </a>
+    </div>
+    <div class="col">
+        <a class="btn btn-outline-dark btn-sm" asp-area="" asp-action="HorarioPDF" asp-route-id="@Model.Horario.ID" style="float: right">
+            <i class="fas fa-book"></i>
+            PDF
+        </a>
+    </div>
+</div>
+<hr />
+<br />
+@if (Model.Horario.FilasHorarios != null)
+{
+    if (Model.Horario.FilasHorarios.Count != 0)
+    {
+        <table class="table table-sm table-bordered">
+            <thead class="">
+                <tr class="alert-success" style="color: black;">
+                    <th style="width: 165px;">Horario</th>
+                    <th >Lunes</th>
+                    <th >Martes</th>
+                    <th >Miércoles</th>
+                    <th >Jueves</th>
+                    <th >Viernes</th>
+                    <th style="width: 55px;"></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model.Horario.FilasHorarios)
+            {
+        <tr>
+            <td>
+                @item.HoraEntrada.ToString("hh:mm")
+                @item.HoraEntrada.ToString("tt", System.Globalization.CultureInfo.InvariantCulture).ToLower()
+                -
+                @item.HoraSalida.ToString("hh:mm")
+                @item.HoraSalida.ToString("tt", System.Globalization.CultureInfo.InvariantCulture).ToLower()
+
+            </td>
+            <td>
+                @item.DiaUno
+            </td>
+            <td>
+                @item.DiaDos
+            </td>
+            <td>
+                @item.DiaTres
+            </td>
+            <td>
+                @item.DiaCuatro
+            </td>
+            <td>
+                @item.DiaCinco
+            </td>
+            <td>
+                <div class="row">
+                    <a class="col-1" asp-controller="FilasHorarios" asp-action="Delete" asp-route-id="@item.ID">
+                        <div class="sb-nav-link-icon"><i class="fas fa-times" style="color: #DC3545"></i></div>
+                    </a>
+                    <a class="col-1" asp-controller="FilasHorarios" asp-action="Edit" asp-route-id="@item.ID">
+                        <div class="sb-nav-link-icon"><i class="fas fa-pen" style="color: #007BFF"></i></div>
+                    </a>
+                </div>
+            </td>
+        </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <h6 style="margin-bottom: 20px;">No hay filas asignadas</h6>
+    }
+
+}
+<hr />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Horario.ID">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>

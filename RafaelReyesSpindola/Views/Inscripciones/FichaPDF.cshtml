@@ -1,0 +1,130 @@
+﻿@model RafaelReyesSpindola.Models.SchoolViewModels.InscripcionData
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCRotativaCore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div>
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <td style="color: white; width: 0.5px;">
+                        .
+                    </td>
+                    <td>
+                        <div>
+                            <img class="" src="~/images/l-spindola.jpg" style="height: 130px;">
+                        </div>
+                    </td>
+                    <td>
+                        <div style="text-align: center;">
+                            <h3>INSTITUTO RAFAEL REYES SPÍNDOLA</h3>
+                            <h4>PRIMARIA INCORPORADA AL I.E.E.P.O</h4>
+                            <h4>CLAVE: 20PPR0129T</h4>
+                            <h5><u>“Construyamos al hombre de mañana sin destruir al niño de hoy”</u></h5>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <img class="" src="~/images/ieepo.jpg" style="height: 75px;">
+                        </div>
+                    </td>
+                    <td style="color: white; width: 0.5px;">
+                        .
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <main role="main">
+            <hr style="height: 2px; background-color: orangered;" />
+            <br />
+            <div>
+                <div style="text-align: center;">
+                    <h4>SOLICITUD DE INSCRIPCIÓN</h4>
+                </div>
+                <br />
+                <div>
+                    <h5 class="badge badge-warning" style="font-size: 18px; text-align:right; float: right">Folio: @Html.DisplayFor(model => model.Inscripcion.Folio)</h5>
+                    <h5 style="text-align:right; float: left">Fecha: <u>@Html.DisplayFor(model => model.Inscripcion.FechaInscripcion)</u></h5>
+                </div>
+                <br /><br />
+                <h5 style="font-weight: bold;">Datos del alumno:</h5> <br />
+                <table class="table table-bordered">
+                     <caption><h5 style="color: black;">Matrícula - Alumno: <strong style="color: red; font-weight:normal;">@Model.Estudiante.Matricula</strong></h5></caption>
+                    <tbody>
+                        <tr>
+                            <td><h5>Nombre: @Model.Inscripcion.Estudiante.NombreCompleto</h5></td>
+                            <td><h5>Edad: @Model.Inscripcion.Estudiante.Edad años</h5></td>
+                        </tr>
+                        <tr>
+                            <td><h5>Fecha de Nacimiento: @Model.Inscripcion.Estudiante.FechaNacimiento.ToString("yyyy/MM/dd")</h5></td>
+                            <td><h5>Grado que inicia: @Model.Inscripcion.Grado.Nombre</h5></td>
+                        </tr>
+                        <tr>
+                            <td><h5>Escuela de Procedencia: @Model.Inscripcion.Estudiante.EscuelaProcedencia.Nombre</h5></td>
+                            <td><h5>Promedio: @Model.Inscripcion.Estudiante.PromedioProcedencia</h5></td>
+                        </tr>
+                        <tr>
+                            <td><h5>Enfermedades y tratamiento: @Model.Inscripcion.Estudiante.Enfermedades</h5></td>
+                            <td><h5>Tipo de sangre: @Model.Estudiante.TipoSangre.NombreTipo</h5></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5 style="font-weight: bold;">Datos del Tutor:</h5> <br />
+                <table class="table table-bordered">
+                    <caption><h5 style="color: black;">Matrícula - Tutor: <strong style="color: red; font-weight:normal;">@Model.Tutor.Matricula</strong></h5></caption>
+                    <tbody>
+                        <tr>
+                            <td colspan="2"><h5>Nombre: @Model.Tutor.NombreCompleto</h5></td>
+                            <td><h5>Edad: @Model.Tutor.Edad años</h5></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><h5>Parentesco: @Model.Estudiante.ParentescoTutor</h5></td>
+                            <td><h5>Escolaridad: @Model.Tutor.Escolaridad.Nombre</h5></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><h5>Dirección: @Model.Tutor.Direccion</h5></td>
+                            <td><h5>Ocupación: @Model.Tutor.Ocupacion</h5></td>
+                        </tr>
+                        <tr>
+                            <td><h5>Teléfono celular: @Model.Tutor.TelefonoCelular</h5></td>
+                            <td><h5>Teléfono de casa: @Model.Tutor.TelefonoCelular</h5></td>
+                            <td><h5>Teléfono de trabajo: @Model.Tutor.TelefonoCelular</h5></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><h5>Correo electrónico: @Model.Tutor.CorreoElectronico</h5></td>
+                            <td><h5>Facebook: @Model.Tutor.Facebook</h5></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br /> <br /><br />
+            <div style="display: flex; justify-content: center; align-items: center; text-align: center;">
+                <hr style="height: 0.8px; width: 300px; background-color: black;" />
+                <h5>Nombre y firma del padre o tutor</h5>
+            </div>
+            <br /> <br /><br />
+            <hr style="height: 2px; background-color: orangered;" />        
+            <h5 style="text-align: center;">Priv. Emilio Ibarra No. 5, Barrio San Diego, Tlaxiaco, Oax., Teléfono: 55 21832, Whatsapp:9531070603.</h5>
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+

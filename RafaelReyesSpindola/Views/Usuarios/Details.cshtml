@@ -1,0 +1,93 @@
+﻿@model RafaelReyesSpindola.Models.Usuario
+
+@{
+    ViewData["Title"] = "Details";
+}
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg rounded-lg my-4">
+                <div class="card-header">
+                    <img class="rounded-circle" src="~/images/icon-perfil.png" style="height: 75px; display:block; margin: auto; margin-top: 15px;">
+                    <h3 class="text-center">@Model.NombreUsuario</h3>
+                    <h6 class="text-center text-dark" style="margin-bottom: -10px;">@Model.NombreCompleto</h6>
+                    <div class="row">
+                        <div class="form-group col d-flex justify-content-end mt-4 mb-0">
+                            <a class="badge badge-info" asp-action="Edit" asp-route-id="@Model.ID" style="width: 150px;">Editar usuario</a>                            
+                        </div>
+                        <div class="form-group col d-flex justify-content-start mt-4 mb-0">                            
+                            <a class="badge badge-warning" asp-action="Password" asp-route-id="@Model.ID" style="width: 150px;">Cambiar contraseña</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-sm table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.NombreUsuario):</th>
+                                <td>@Html.DisplayFor(model => model.NombreUsuario)</td>
+                                <th>@Html.DisplayNameFor(model => model.Correo):</th>
+                                <td colspan="2">@Html.DisplayFor(model => model.Correo)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.FechaNacimiento):</th>
+                                <td>@Html.DisplayFor(model => model.FechaNacimiento)</td>
+                                <th>@Html.DisplayNameFor(model => model.Edad):</th>
+                                <td>@Html.DisplayFor(model => model.Edad) años</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Matricula):</th>
+                                <td>@Html.DisplayFor(model => model.Matricula)</td>
+                            </tr>                            
+                         </tbody>
+                    </table>
+                    <hr />
+                    <table>
+                        <tr>
+                            @{
+                                if (Model.RolesUsuario != null)
+                                {
+                                    int cnt = 0;
+
+                                    foreach (var rol in Model.RolesUsuario)
+                                    {
+                                        if (cnt++ % 4 == 0)
+                                        {
+                                        @:</tr><tr>
+                                        }
+                                        @:<td>
+                                            if (cnt == 1)
+                                            {
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <b class="font-weight-normal" style="color: #464646">Roles asignados: </b> 
+                                                        <b class="font-weight-light font-italic">@rol.Rol.Descripcion </b> 
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="col font-weight-light font-italic">
+                                                        , @rol.Rol.Descripcion 
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        @:</td>
+                                    }
+                                }
+
+                            @:</tr>
+                            }
+                        </table>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-action="Index">Volver a la lista de usuarios</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>

@@ -1,0 +1,95 @@
+﻿@model RafaelReyesSpindola.Models.Usuario
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar</h1>
+
+<h3>¿Estás seguro de eliminar este usuario?</h3>
+<p>Si encuentra un error al eliminar, elimine primero los datos asociados como: sus cortes de caja, cajas asignadas.</p>
+<h4>Usuario</h4>
+<hr />
+<div class="container col-md-11">
+    <div class="card border-danger" max-width: 18rem;>
+        <div class="card-header bg-danger border-danger">
+            <div class="row">
+                <h6 class="card-title text-white col" style="margin-bottom: 0px;">Usuario:</h6>
+                <div class="col-3">
+                    <h6 class="badge badge-warning" style="float:right;">
+                        Nombre: @Html.DisplayFor(model => model.NombreUsuario)
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+         <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <dl class="row">
+                        <dt class = "col-sm-6">
+                            @Html.DisplayNameFor(model => model.NombreUsuario)
+                        </dt>
+                        <dd class = "col-sm-6">
+                            @Html.DisplayFor(model => model.NombreUsuario)
+                        </dd>
+                        <dt class = "col-sm-6">
+                            @Html.DisplayNameFor(model => model.Correo)
+                        </dt>
+                        <dd class = "col-sm-6">
+                            @Html.DisplayFor(model => model.Correo)
+                        </dd>
+        
+                        <dt class = "col-sm-6">
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </dt>
+                        <dd class = "col-sm-6">
+                            @Html.DisplayFor(model => model.Nombre)
+                        </dd>
+                        <dt class = "col-sm-6">
+                            @Html.DisplayNameFor(model => model.ApellidoPaterno)
+                        </dt>
+                        <dd class = "col-sm-6">
+                            @Html.DisplayFor(model => model.ApellidoPaterno)
+                        </dd>
+                        <dt class = "col-sm-6">
+                            @Html.DisplayNameFor(model => model.ApellidoMaterno)
+                        </dt>
+                        <dd class = "col-sm-6">
+                            @Html.DisplayFor(model => model.ApellidoMaterno)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col">
+                    <dl class="row">                                                            
+                    <dt class = "col-sm-6">
+                        @Html.DisplayNameFor(model => model.Edad)
+                    </dt>
+                    <dd class = "col-sm-6">
+                        @Html.DisplayFor(model => model.Edad)
+                    </dd>
+                    <dt class = "col-sm-6">
+                        @Html.DisplayNameFor(model => model.FechaNacimiento)
+                    </dt>
+                    <dd class = "col-sm-6">
+                        @Html.DisplayFor(model => model.FechaNacimiento)
+                    </dd>
+                    <dt class = "col-sm-6">
+                        @Html.DisplayNameFor(model => model.Matricula)
+                    </dt>
+                    <dd class = "col-sm-6">
+                        @Html.DisplayFor(model => model.Matricula)
+                    </dd>
+                </dl>
+                </div>
+            </div>
+         </div>
+    </div>
+    <br />
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver a la lista</a>
+    </form>
+</div>

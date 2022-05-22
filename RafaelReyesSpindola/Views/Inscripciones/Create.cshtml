@@ -1,0 +1,74 @@
+﻿@model RafaelReyesSpindola.Models.Inscripcion
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="">
+    <h1>Trámite</h1>
+    <button type="button" class="btn btn-outline-dark btn-sm" OnClick="javascript: return history.back()" style="float: right">
+        <i class="fas fa-arrow-left"></i>
+        Volver
+    </button>
+    <h4 style="margin-left:7px;">Inscripción</h4>
+
+</div>
+<hr />
+<br />
+<div class="row  justify-content-center">
+    <div class="col-md-12 justify-content-center">
+        <div class="container shadow-sm" style="padding: 40px; border: 1px solid #0E76BB;">
+            
+            <div style="background-color: #F0F0F0;
+                        padding: 5px; padding-bottom: 5px;
+                        padding-top: 10px;
+                        margin-bottom: -5px;">
+                <h5>DATOS DE INSCRIPCIÓN</h5>
+            </div>
+            <hr style="height: 2px; background-color: #0E76BB" />
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="form-group col col-4">
+                        <label asp-for="FechaInscripcion" class="control-label"></label>
+                        <input type="datetime-local" asp-for="FechaInscripcion" class="form-control" />
+                        <span asp-validation-for="FechaInscripcion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col col-4">
+                        <label asp-for="EstudianteID" class="control-label"></label>
+                        <select asp-for="EstudianteID" class="form-control" asp-items="ViewBag.EstudianteID"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label asp-for="CicloEscolarID" class="control-label"></label>
+                        <select asp-for="CicloEscolarID" class="form-control" asp-items="ViewBag.CicloEscolarID"></select>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="GradoID" class="control-label"></label>
+                        <select asp-for="GradoID" class="form-control" asp-items="ViewBag.GradoID"></select>
+                    </div>
+                    <div class="form-group col">
+                        <label asp-for="GrupoID" class="control-label"></label>
+                        <select asp-for="GrupoID" class="form-control" asp-items="ViewBag.GrupoID"></select>
+                    </div>
+
+                </div>
+                <hr />
+                <div class="form-group">
+                    <input type="submit" value="Inscribir" class="btn btn-primary" style="float: right;" />
+                </div>
+                <div>
+                    <a asp-action="Index">Ir al listado de inscripciones</a>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

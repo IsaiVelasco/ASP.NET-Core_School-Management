@@ -1,0 +1,51 @@
+﻿@model IEnumerable<RafaelReyesSpindola.Models.Horario>
+
+@{
+    ViewData["Title"] = "Horarios";
+}
+
+<h1>Horarios</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Grado
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grupo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grupo.Grado.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grupo.NombreGrupo)
+            </td>
+            <td>
+                <!--<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |-->
+                <div class="row">
+                    <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                        <div class="sb-nav-link-icon"><i class="fas fa-sign-in-alt" style="color: #007BFF"></i></div>
+                    </a>
+                    <!--
+                    <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900;"></i></div>
+                    </a>-->
+                    <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235;"></i></div>
+                    </a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

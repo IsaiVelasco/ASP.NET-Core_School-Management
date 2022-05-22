@@ -1,0 +1,126 @@
+﻿@model RafaelReyesSpindola.Models.SchoolViewModels.ScheduleWithLines
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCRotativaCore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div>
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <td style="color: white; width: 0.5px;">
+                        .
+                    </td>
+                    <td>
+                        <div>
+                            <img class="" src="~/images/l-spindola.jpg" style="height: 130px;">
+                        </div>
+                    </td>
+                    <td>
+                        <div style="text-align: center;">
+                            <h3>INSTITUTO RAFAEL REYES SPÍNDOLA</h3>
+                            <h4>PRIMARIA INCORPORADA AL I.E.E.P.O</h4>
+                            <h4>CLAVE: 20PPR0129T</h4>
+                            <h5><u>“Construyamos al hombre de mañana sin destruir al niño de hoy”</u></h5>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <img class="" src="~/images/ieepo.jpg" style="height: 75px;">
+                        </div>
+                    </td>
+                    <td style="color: white; width: 0.5px;">
+                        .
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <div>
+                <h3 style="text-align: center;">Horario</h3>
+                <div>
+                    <h5 style="text-align: center;">
+                        <strong>Grupo: </strong> @Html.DisplayFor(g => Model.Horario.Grupo.GradoYGrupo)
+                    </h5>
+                </div>
+            </div>
+            <br />
+            @if (Model.Horario.FilasHorarios != null)
+            {
+                if (Model.Horario.FilasHorarios.Count != 0)
+                {
+                    <table class="table table-sm table-bordered">
+                        <thead class="text-white">
+                            <tr class="alert-success" style="color: black;">
+                                <th style="width: 165px;">Horario</th>
+                                <th>Lunes</th>
+                                <th>Martes</th>
+                                <th>Miércoles</th>
+                                <th>Jueves</th>
+                                <th>Viernes</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (var item in Model.Horario.FilasHorarios)
+                        {
+                            <tr>
+                                <td>
+                                    @item.HoraEntrada.ToString("hh:mm")
+                                    @item.HoraEntrada.ToString("tt", System.Globalization.CultureInfo.InvariantCulture).ToLower()
+                                    -
+                                    @item.HoraSalida.ToString("hh:mm")
+                                    @item.HoraSalida.ToString("tt", System.Globalization.CultureInfo.InvariantCulture).ToLower()
+
+                                </td>
+                                <td>
+                                    @item.DiaUno
+                                </td>
+                                <td>
+                                    @item.DiaDos
+                                </td>
+                                <td>
+                                    @item.DiaTres
+                                </td>
+                                <td>
+                                    @item.DiaCuatro
+                                </td>
+                                <td>
+                                    @item.DiaCinco
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                }
+                else
+                {
+                    <h6 style="margin-bottom: 20px;">No hay filas asignadas</h6>
+                }
+
+            }
+                     
+            <br /> <br /><br />
+            <hr style="height: 1.5px; background-color: orangered;" />
+            <h6 style="text-align: center;">Priv. Emilio Ibarra No. 5, Barrio San Diego, Tlaxiaco, Oax., Teléfono: 55 21832, Whatsapp:9531070603.</h6>
+
+        </main>
+    </div>
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

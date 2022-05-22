@@ -1,0 +1,89 @@
+﻿@model IEnumerable<RafaelReyesSpindola.Models.FilaHorario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Horario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraEntrada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraSalida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaUno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaDos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaTres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaCuatro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaCinco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaSeis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaSiete)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Horario.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraEntrada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraSalida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaUno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaDos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaTres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaCuatro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaCinco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaSeis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaSiete)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

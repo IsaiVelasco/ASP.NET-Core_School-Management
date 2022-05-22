@@ -1,0 +1,121 @@
+﻿@model RafaelReyesSpindola.Models.CorteDeCaja
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CorteDeCaja</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="CajaID" class="control-label"></label>
+                <select asp-for="CajaID" class="form-control" asp-items="ViewBag.CajaID"></select>
+                <span asp-validation-for="CajaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioID" class="control-label"></label>
+                <select asp-for="UsuarioID" class="form-control" asp-items="ViewBag.UsuarioID"></select>
+                <span asp-validation-for="UsuarioID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contado" class="control-label"></label>
+                <input asp-for="Contado" class="form-control" />
+                <span asp-validation-for="Contado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Calculado" class="control-label"></label>
+                <input asp-for="Calculado" class="form-control" />
+                <span asp-validation-for="Calculado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diferencia" class="control-label"></label>
+                <input asp-for="Diferencia" class="form-control" />
+                <span asp-validation-for="Diferencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="B1000" class="control-label"></label>
+                <input asp-for="B1000" class="form-control" />
+                <span asp-validation-for="B1000" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="B500" class="control-label"></label>
+                <input asp-for="B500" class="form-control" />
+                <span asp-validation-for="B500" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="B200" class="control-label"></label>
+                <input asp-for="B200" class="form-control" />
+                <span asp-validation-for="B200" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="B100" class="control-label"></label>
+                <input asp-for="B100" class="form-control" />
+                <span asp-validation-for="B100" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="B50" class="control-label"></label>
+                <input asp-for="B50" class="form-control" />
+                <span asp-validation-for="B50" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="B20" class="control-label"></label>
+                <input asp-for="B20" class="form-control" />
+                <span asp-validation-for="B20" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="M10" class="control-label"></label>
+                <input asp-for="M10" class="form-control" />
+                <span asp-validation-for="M10" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="M5" class="control-label"></label>
+                <input asp-for="M5" class="form-control" />
+                <span asp-validation-for="M5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="M2" class="control-label"></label>
+                <input asp-for="M2" class="form-control" />
+                <span asp-validation-for="M2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="M1" class="control-label"></label>
+                <input asp-for="M1" class="form-control" />
+                <span asp-validation-for="M1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="C50" class="control-label"></label>
+                <input asp-for="C50" class="form-control" />
+                <span asp-validation-for="C50" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="C20" class="control-label"></label>
+                <input asp-for="C20" class="form-control" />
+                <span asp-validation-for="C20" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="C10" class="control-label"></label>
+                <input asp-for="C10" class="form-control" />
+                <span asp-validation-for="C10" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

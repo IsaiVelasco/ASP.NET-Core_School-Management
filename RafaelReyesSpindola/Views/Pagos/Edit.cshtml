@@ -1,0 +1,152 @@
+﻿@model RafaelReyesSpindola.Models.Pago
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<script src="~/js/pago.js" type="text/javascript"></script>
+<h1>Editar</h1>
+<div class="form-group" style="float:right;">
+    <label asp-for="Folio" class="control-label badge badge-pill badge-dark">Folio: @Model.Folio</label>
+    
+</div>
+<h4>Pago</h4>
+
+<hr />
+<div class="row">
+    <div class="container col-md-11">        
+        <form asp-action="Edit" name="formu">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="row">
+                <div class="col col-6">
+                    <div class="form-group">
+                        <label asp-for="EstudianteID" class="control-label"></label>
+                        <select asp-for="EstudianteID" class="form-control" asp-items="ViewBag.EstudianteID"></select>
+                        <span asp-validation-for="EstudianteID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <h6>Selecciones los conceptos a pagar</h6>
+                        <div class="">
+                            <table class="table table-borderless table-sm">
+                                <tr>
+                                    @{
+                                        int cnt = 0;
+                                        List<RafaelReyesSpindola.Models.SchoolViewModels.AssignedConceptData> conceptosPago = ViewBag.ConceptosPago;
+
+                                        foreach (var conceptoPago in conceptosPago)
+                                        {
+                                            if (cnt++ % 1 == 0)
+                                            {
+                                            @:</tr><tr>
+                                            }
+                                            @:<td>
+                                                <div class="row">
+                                                    <div class="col-1">
+                                                        <input type="checkbox"
+                                                               onClick="Cambia(this,@conceptoPago.Tarifa.ToString())"
+                                                               name="selectedConceptosPago"
+                                                               value="@conceptoPago.ConceptoPagoID"
+                                                               @(Html.Raw(conceptoPago.Assigned ? "checked=\"checked\"" : "")) />
+
+                                                    </div>
+                                                    <div class="col-5">@conceptoPago.Nombre</div>
+                                                    <div class="col-3">@conceptoPago.Tarifa</div>
+                                                </div>
+                                            @:</td>
+                                        }
+                                    @:</tr>
+                                    }
+                             </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="FechaPago" class="control-label"></label>
+                        <input type="datetime-local" asp-for="FechaPago" class="form-control" />
+                        <span asp-validation-for="FechaPago" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label asp-for="Recargo" class="control-label"></label>
+                            <a id="icollapse" data-toggle="collapse" href="#collapse" role="button" aria-expanded="false" aria-controls="collapse">
+                                <i class="fas fa-plus-square" style=" color: #28A745"></i>
+                            </a>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                                <input asp-for="Recargo" type="number" name="recargo" readonly class="form-control" style="background-color:white;" />
+                            </div>
+                            <span asp-validation-for="Recargo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col">
+                            <label asp-for="TotalPagar" class="control-label"></label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                                <input asp-for="TotalPagar" type="number" readonly step="0.01"
+                                       class="form-control" name="totalpagar" style="background-color: white;" />
+                            </div>
+                            <span asp-validation-for="TotalPagar" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row collapse" id="collapse" style="margin-top: -10px; margin-bottom: 10px;">
+                        <div class="col">
+                            <div class=" card card-body border-success">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="input-group input-group-sm">
+                                            <input id="montoP" type="number" class="form-control" placeholder="Monto del recargo" min="0" max="100">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                    <div class="col-4">
+                                        <button id="quitar" type="button" disabled class="btn btn-outline-danger btn-sm" onclick="QuitarRecargo()">
+                                            <i class="fas fa-times-circle"></i>
+                                        </button>
+                                        <button id="aplicar" type="button" class="btn btn-outline-success btn-sm" onclick="AplicarRecargo()">
+                                            <i class="fas fa-check-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label asp-for="MontoPagado" class="control-label"></label>
+                            <input  id="pagado" asp-for="MontoPagado" type="number" step="0.01" class="form-control" onkeyup="obtenerValorTP()" />
+                            <span asp-validation-for="MontoPagado" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col">
+                            <label asp-for="MontoRestante" class="control-label"></label>
+                            <input  id="restante" asp-for="MontoRestante" class="form-control" />
+                            <span asp-validation-for="MontoRestante" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="form-group" style="float:right;">
+                                <input type="submit" value="Actualizar" class="btn btn-warning" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                                    
+        </form>
+    </div>
+        
+</div>
+<hr />   
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

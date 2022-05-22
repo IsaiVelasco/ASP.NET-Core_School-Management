@@ -1,0 +1,339 @@
+﻿@model IEnumerable<RafaelReyesSpindola.Models.Materia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <h1>Registro de Materias</h1>
+   
+    <p style="float:right;">
+        <a asp-action="Create" class="btn btn-success btn-sm">            
+            Agregar materia
+        </a>
+    </p><br /><br />
+    <ul class="nav nav-pills mb-3 alert alert-info" id="pills-tab" role="tablist" style="padding:10px;">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link  active" id="pills-primero-tab" data-bs-toggle="pill" data-bs-target="#pills-primero" type="button" role="tab" aria-controls="pills-primero" aria-selected="true">Primero</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link " id="pills-segundo-tab" data-bs-toggle="pill" data-bs-target="#pills-segundo" type="button" role="tab" aria-controls="pills-segundo" aria-selected="false">Segundo</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link " id="pills-tercero-tab" data-bs-toggle="pill" data-bs-target="#pills-tercero" type="button" role="tab" aria-controls="pills-tercero" aria-selected="false">Tercero</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link " id="pills-cuarto-tab" data-bs-toggle="pill" data-bs-target="#pills-cuarto" type="button" role="tab" aria-controls="pills-cuarto" aria-selected="false">Cuarto</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link " id="pills-quinto-tab" data-bs-toggle="pill" data-bs-target="#pills-quinto" type="button" role="tab" aria-controls="pills-quinto" aria-selected="false">Quinto</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link " id="pills-sexto-tab" data-bs-toggle="pill" data-bs-target="#pills-sexto" type="button" role="tab" aria-controls="pills-sexto" aria-selected="false">Sexto</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-primero" role="tabpanel" aria-labelledby="pills-primero-tab">
+            <table class="table  table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TipoMateria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grado)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Grado.Nombre == "Primero")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoMateria.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Grado.Nombre)
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-eye" style="color: #007BFF"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235"></i></div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="pills-segundo" role="tabpanel" aria-labelledby="pills-segundo-tab">
+            <table class="table  table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TipoMateria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grado)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Grado.Nombre == "Segundo")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoMateria.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Grado.Nombre)
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-eye" style="color: #007BFF"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235"></i></div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="pills-tercero" role="tabpanel" aria-labelledby="pills-tercero-tab">
+            <table class="table  table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TipoMateria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grado)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Grado.Nombre == "Tercero")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoMateria.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Grado.Nombre)
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-eye" style="color: #007BFF"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235"></i></div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="pills-cuarto" role="tabpanel" aria-labelledby="pills-cuarto-tab">
+            <table class="table  table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TipoMateria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grado)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Grado.Nombre == "Cuarto")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoMateria.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Grado.Nombre)
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-eye" style="color: #007BFF"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235"></i></div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="pills-quinto" role="tabpanel" aria-labelledby="pills-quinto-tab">
+            <table class="table  table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TipoMateria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grado)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Grado.Nombre == "Quinto")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoMateria.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Grado.Nombre)
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-eye" style="color: #007BFF"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235"></i></div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="pills-sexto" role="tabpanel" aria-labelledby="pills-sexto-tab">
+            <table class="table  table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TipoMateria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grado)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Grado.Nombre == "Sexto")
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoMateria.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Grado.Nombre)
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-eye" style="color: #007BFF"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                                        </a>
+                                        <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235"></i></div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

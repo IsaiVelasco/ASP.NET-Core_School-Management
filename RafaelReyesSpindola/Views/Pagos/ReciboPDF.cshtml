@@ -1,0 +1,183 @@
+﻿@model RafaelReyesSpindola.Models.SchoolViewModels.RecibosPago
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en" style="">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCRotativaCore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body style="">
+    <div>
+        <hr style="height: 2px; background-color: #008E5A" />
+        <div class="container">
+            <img class="" src="images/logo-tr.png" style="height: 150px; float: right;
+                border-color: white; border-style: solid;">
+            <h1 style="margin-top: 30px; color: #073C5F;">Instituto Rafael Reyes Síndola</h1>
+            <h5 style="margin-bottom: 0px;">Primaria incorporada al I.E.E.P.O</h5>
+            <h5>Clave: 20PPR0129T</h5>
+            <br><br><br><br />
+
+            <div style="background-color: #CCEADE;
+                        padding: 5px; padding-bottom: 10px;
+                        padding-top: 10px;
+                        margin-top: 10px;
+                        margin-bottom: 0px;">
+                <h3>RECIBO DE PAGO</h3>
+                <h5 style="margin-bottom: 0px; float: left;">Pago en efectivo</h5>
+                <h6 style="float: right;">Fecha: @DateTime.Now.Date.ToShortDateString()</h6>
+                <br>
+            </div>
+            <br />
+            <div>
+                <table class="table table-sm table-borderless table-striped">
+                    <tr>
+                        <th>
+                            DATOS DEL CLIENTE
+                        </th>
+                        <th>
+                            EXPIDE
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                @if (Model.Pago.Estudiante.Tutor != null)
+                                {
+                                    <h6 style="margin-bottom: 0px;">Nombre: @Model.Pago.Estudiante.Tutor.NombreCompleto</h6>
+                                    <h6 style="margin-bottom: 0px;">Matrícula: @Model.Pago.Estudiante.Tutor.Matricula</h6>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @if (Model.Usuario != null)
+                                {
+                                    <h6 style="margin-bottom: 0px;">Nombre: @Model.Usuario.NombreCompleto</h6>
+                                    <h6 style="margin-bottom: 0px;">Matrícula: @Model.Usuario.Matricula</h6>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <hr />
+                <br />
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <main role="main" class="">
+
+            @if (Model.Pago.ListaConceptos != null)
+            {
+                @if (Model.Pago.ListaConceptos.Count != 0)
+                {
+                    <h5>CONCEPTO(S) CORRESPONDIENTE(S) AL PAGO</h5>
+                    <table class="table table-sm table-striped table-bordered">
+                        <thead style="background-color: #008E5A;">
+                            <tr style="color: whitesmoke;">
+                                <th>Nombre</th>
+                                <th>Tarifa</th>
+                                <th>Periodo</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model.Pago.ListaConceptos)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ConceptoPago.Nombre
+                                </td>
+                                <td>
+                                    $@item.ConceptoPago.Tarifa
+                                </td>
+                                <td>
+                                    @item.ConceptoPago.PeriodoPago
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                    <br />
+                    <hr />
+                    <br />
+                    <h5>DESCRIPCIÓN DEL PAGO</h5>
+                    <div class="text-center justify-content-center" style="height: 180px;
+                                             width: 150px; border-style:solid;
+                                             border-width: 1px 1px 1px 1px;
+                                             border-color: #84D5A8;
+                                             float: right;">
+                        <h6 class="col-12" style="color: grey;">Sello de validez oficial</h6>
+                    </div>
+                    <table class="table table-sm  table-borderless" style="width: 50%;">
+                        <tr>
+                            <td>
+                                <strong>Folio del pago: </strong>
+                            </td>
+                            <td>
+                                @Model.Pago.Folio
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Estudiante: </strong>
+                            </td>
+                            <td>
+                                @Model.Pago.Estudiante.NombreCompleto
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Total a Pagar: </strong>
+                            </td>
+                            <td>
+                                $@Model.Pago.TotalPagar
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Recargo: </strong>
+                            </td>
+                            <td>
+                                $@Model.Pago.Recargo
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong> Monto pagado: </strong>
+                            </td>
+                            <td>
+                                $@Model.Pago.MontoPagado
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Monto restante: </strong>
+                            </td>
+                            <td>
+                                $@Model.Pago.MontoRestante
+                            </td>
+                        </tr>
+                    </table>
+
+                }
+                else
+                {
+                    <h6 style="margin-bottom: 20px;" class="text-danger">No hay movimientos para mostrar</h6>
+                }
+            }
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+
+</html>

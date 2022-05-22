@@ -1,0 +1,49 @@
+﻿@model IEnumerable<RafaelReyesSpindola.Models.Alergia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Alergias</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClasificacionAlergia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClasificacionAlergia.NombreClasificacionAlergia)
+            </td>
+            <td>
+                <div class="row">
+                    <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                        <div class="sb-nav-link-icon"><i class="fas fa-eye" style="color: #007BFF"></i></div>
+                    </a>
+                    <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                    </a>
+                    <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235"></i></div>
+                    </a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

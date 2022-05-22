@@ -1,0 +1,147 @@
+﻿@model RafaelReyesSpindola.Models.SchoolViewModels.CajaMovimientos;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en" style="">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVCRotativaCore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body style="">
+    <div>
+        <hr style="height: 2px; background-color: #0E76BB" />
+        <div class="container">
+            <img class="" src="images/logo-tr.png" style="height: 150px; float: right;
+                border-color: white; border-style: solid;">
+            <h1 style="margin-top: 30px; color: #073C5F;">Instituto Rafael Reyes Síndola</h1>
+            <h5 style="margin-bottom: 0px;">Primaria incorporada al I.E.E.P.O</h5>
+            <h5>Clave: 20PPR0129T</h5>
+            <br><br><br>
+
+            <div style="background-color: #F0F0F0;
+                        padding: 5px; padding-bottom: 10px;
+                        padding-top: 10px;
+                        margin-top: 10px;
+                        margin-bottom: 0px;">
+                <h3>INFORME</h3>
+                <h5 style="margin-bottom: 0px; float: left;">Movimientos en caja</h5>
+                <h6 style="float: right;">Fecha: @DateTime.Now.Date.ToShortDateString()</h6>
+                <br>
+            </div>
+            <br />
+            <div>
+                <table class="table table-sm table-borderless table-striped">
+                    <tr>
+                        <th>
+                            DATOS DE LA CAJA
+                        </th>
+                        <th>
+                            DATOS DEL USUARIO
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <h6 style="margin-bottom: 0px;">Caja: @Model.Caja.Nombre</h6>
+                                <h6 style="margin-bottom: 0px;">Efectivo: $@Model.TotalCaja</h6>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @if (Model.Usuario != null)
+                                {
+                                    <h6 style="margin-bottom: 0px;">Nombre: @Model.Usuario.NombreCompleto</h6>
+                                    <h6 style="margin-bottom: 0px;">Matrícula: @Model.Usuario.Matricula</h6>
+                                    <h6 style="margin-bottom: 0px;">Nombre de usuario: @Model.Usuario.NombreUsuario</h6>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <hr />
+                <br />
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <main role="main" class="">
+
+            @if (Model.Caja.Movimientos != null)
+            {
+                @if (Model.Caja.Movimientos.Count != 0)
+                {
+                    <table class="table table-sm table-striped table-bordered">
+                        <thead style="background-color: #0E76BB;">
+                            <tr style="color: whitesmoke;">
+                                <th style="width: 50px;">ID</th>
+                                <th>Acción</th>
+                                <th>Monto</th>
+                                <th>Fecha</th>
+                                <th>Tipo de Movimiento</th>
+                            </tr>
+                        </thead>                        
+                        @foreach (var item in Model.Caja.Movimientos)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ID
+                                </td>
+                                <td>
+                                    @item.Accion
+                                </td>
+                                <td>
+                                    $@item.Monto
+                                </td>
+                                <td>
+                                    @item.Fecha.ToLongDateString(), @item.Fecha.ToShortTimeString()
+                                </td>
+                                <td>
+                                    @item.TipoMovimiento
+                                </td>
+                            </tr>
+                            
+                        }
+                    </table>                    
+                    <table class="table table-sm table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Cálculos de la tabla</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>
+                                <strong>Ingresos: </strong>$@Model.TotalIngresos
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Egresos: </strong>$@Model.TotalEgresos
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Diferencia: </strong>$@Model.Diferencia
+                            </td>
+                        </tr>
+                    </table>
+                }
+                else
+                {
+                    <h6 style="margin-bottom: 20px;" class="text-danger">No hay movimientos para mostrar</h6>
+                }
+            }
+        </main>
+    </div>
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+
+</html>

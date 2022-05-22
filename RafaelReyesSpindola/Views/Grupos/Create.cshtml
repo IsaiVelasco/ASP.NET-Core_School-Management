@@ -1,0 +1,37 @@
+﻿@model RafaelReyesSpindola.Models.Grupo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Crear</h1>
+
+<h4>Grupo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GradoID" class="control-label"></label>
+                <select asp-for="GradoID" class ="form-control" asp-items="ViewBag.GradoID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreGrupo" class="control-label"></label>
+                <input asp-for="NombreGrupo" class="form-control" />
+                <span asp-validation-for="NombreGrupo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

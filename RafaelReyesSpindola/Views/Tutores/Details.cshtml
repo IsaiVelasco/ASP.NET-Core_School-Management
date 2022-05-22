@@ -1,0 +1,148 @@
+﻿@model RafaelReyesSpindola.Models.Tutor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+<h4>Tutor</h4>
+<button type="button" class="btn btn-outline-dark btn-sm" OnClick="javascript: return history.back()" style="float: right">
+    <i class="fas fa-arrow-left"></i>
+    Volver
+</button>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-outline-secondary btn-sm" id="icollapse" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" style="float: left;">
+            <i class="fas fa-user-graduate"></i>
+            Estudiantes Asignados
+        </button>
+        <a class="btn btn-primary btn-sm" asp-area="" asp-controller="Estudiantes" asp-action="Create" asp-route-id="@Model.ID" style="float: left; margin-left: 20px;">
+            <i class="fas fa-user-plus"></i>
+            Nuevo Estudiante
+        </a>
+    </div>
+    <div class="col">
+        
+    </div>
+</div>
+<hr />
+<div class="collapse" id="collapse" style="margin-top: -10px; margin-bottom: 10px;">
+    <div class="card">
+        <div class="card-body" style="padding-bottom: 0px;">
+            @if (Model.Estudiantes != null)
+            {
+                if (Model.Estudiantes.Count != 0)
+                {
+                    <table class="table table-sm table-borderless">
+                        <tr>
+                            <th scope="col">Matrícula</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido Paterno</th>
+                            <th scope="col">Apellido Materno</th>
+                            <th scope="col"></th>
+                        </tr>
+
+                        @foreach (var item in Model.Estudiantes)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Matricula
+                                </td>
+                                <td>
+                                    @item.Nombre
+                                </td>
+                                <td>
+                                    @item.ApellidoPaterno
+                                </td>
+                                <td>
+                                    @item.ApellidoMaterno
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <a class="col" asp-controller="Estudiantes" asp-action="Details" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-sign-in-alt" style="color: #007BFF"></i></div>
+                                        </a>
+                                        <a class="col" asp-controller="Estudiantes" asp-action="Edit" asp-route-id="@item.ID">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                }
+                else
+                {
+                    <h6 style="margin-bottom: 20px;">No hay estudiantes asignados</h6>                    
+                }
+
+            }
+        </div>
+    </div>
+</div>
+<div>
+    <div class="card">
+        <div class="card-header" style="padding-bottom: 5px;">
+            <div class="row">
+                <h6 class="card-title col" style="margin-bottom: 0px;">@Html.DisplayFor(model => model.NombreCompleto)</h6>
+                <div class="col-3">
+                    <h6 class="badge badge-warning" style="float:right;">
+                        Matrícula: @Html.DisplayFor(model => model.Matricula)
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding-bottom: 0px;">
+            <table class="table table-hover table-sm table-borderless">
+                <tbody>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Nombre):</th>
+                        <td>@Html.DisplayFor(model => model.Nombre)</td>
+                        <th>@Html.DisplayNameFor(model => model.ApellidoPaterno):</th>
+                        <td>@Html.DisplayFor(model => model.ApellidoPaterno)</td>
+                        <th>@Html.DisplayNameFor(model => model.ApellidoMaterno):</th>
+                        <td>@Html.DisplayFor(model => model.ApellidoMaterno)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.FechaNacimiento):</th>
+                        <td>@Html.DisplayFor(model => model.FechaNacimiento)</td>
+                        <th>@Html.DisplayNameFor(model => model.Edad):</th>
+                        <td>@Html.DisplayFor(model => model.Edad)</td>
+                        <th>@Html.DisplayNameFor(model => model.Escolaridad):</th>
+                        <td>@Html.DisplayFor(model => model.Escolaridad.Nombre)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Ocupacion):</th>
+                        <td>@Html.DisplayFor(model => model.Ocupacion)</td>
+                        <th>@Html.DisplayNameFor(model => model.Escolaridad):</th>
+                        <td>@Html.DisplayFor(model => model.Escolaridad.Nombre)</td>
+                        <th>@Html.DisplayNameFor(model => model.TelefonoCelular):</th>
+                        <td>@Html.DisplayFor(model => model.TelefonoCelular)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.TelefonoCasa):</th>
+                        <td>@Html.DisplayFor(model => model.TelefonoCasa)</td>
+                        <th>@Html.DisplayNameFor(model => model.TelefonoTrabajo):</th>
+                        <td>@Html.DisplayFor(model => model.TelefonoTrabajo)</td>
+                        <th>@Html.DisplayNameFor(model => model.CorreoElectronico):</th>
+                        <td>@Html.DisplayFor(model => model.CorreoElectronico)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Facebook):</th>
+                        <td>@Html.DisplayFor(model => model.Facebook)</td>
+                        <th>@Html.DisplayNameFor(model => model.Direccion):</th>
+                        <td colspan="4">@Html.DisplayFor(model => model.Direccion)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br />
+<!--Colapse-->
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>

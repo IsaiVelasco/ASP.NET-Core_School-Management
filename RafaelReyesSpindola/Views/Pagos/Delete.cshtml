@@ -1,0 +1,69 @@
+﻿@model RafaelReyesSpindola.Models.Pago
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="text-danger">Eliminar</h1>
+
+<h4>Estás seguro de eliminar este pago?</h4>
+<hr />
+<div class="container col-md-7">
+    <div class="card border-danger" max-width: 18rem;>
+        <div class="card-header bg-danger border-danger">
+            <h6 class="card-title text-white" style="margin-bottom: 0px;">Pago:</h6>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Estudiante)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Estudiante.NombreMatricula)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.FechaPago)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.FechaPago)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Recargo)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Recargo)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.TotalPagar)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.TotalPagar)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.MontoPagado)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.MontoPagado)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.MontoRestante)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.MontoRestante)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Folio)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Folio)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <br />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" style="float:right;"/>
+        <a asp-action="Index">Volver a la lista</a>
+    </form>
+</div>

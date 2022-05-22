@@ -1,0 +1,102 @@
+﻿@model RafaelReyesSpindola.Models.Pago
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+<h4>Pago</h4>
+<hr />
+<div class="container">
+
+    <div class="row">
+        <div class="col-6">
+            <div class="card border-info" style="padding-bottom: 0px;">
+                <div class="card-header border-info" style="padding-bottom: 3px;">
+                    <h6>Conceptos del pago seleccionado</h6>
+                </div>
+                <div class="card-body">
+                    @if (Model.ListaConceptos != null)
+                    {
+                        
+                        <table class="table table-sm table-borderless" style="margin-bottom: 0px;">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tarifa</th>
+                                <th>Periodo</th>
+                            </tr>
+
+                            @foreach (var item in Model.ListaConceptos)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.ConceptoPago.Nombre
+                                    </td>
+                                    <td>
+                                        @item.ConceptoPago.Tarifa
+                                    </td>
+                                    <td>
+                                        @item.ConceptoPago.PeriodoPago
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="" style="border-style: dashed;
+                                 border-color: #777777;
+                                 border-width: 2px;
+                                 border-spacing: 100px;
+                                 padding: 12px;">
+
+                <div class="row alert-warning" style=" padding: 5px;">
+                    <div class="col"><strong>Fecha: </strong>@Model.FechaPago</div>
+                </div>
+                <br />
+                <div class="row" style="padding: 5px; background-color: #F1FFEC;">
+                    <div class="col">Estudiante: <b style="color: #007BFF; font-weight: normal;"><a asp-controller="Estudiantes" asp-action="Details" asp-route-id="@Model.Estudiante.ID">@Model.Estudiante.NombreCompleto</a></b></div>
+                    <div class="col">Folio: @Model.Folio</div>
+                </div>
+                <div class="row" style="padding: 5px; padding: 5px;">
+                    <div class="col"><strong>Total a pagar: </strong>@Model.TotalPagar</div>
+                    <div class="col"><strong>Recargo: </strong>@Model.Recargo</div>
+                </div>
+                <div class="row" style="background-color: #FFEEFF; padding: 5px;">
+                    <div class="col"><strong>Monto Pagado: </strong>@Model.MontoPagado</div>
+                    <div class="col"><strong>Monto Restante: </strong>@Model.MontoRestante</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-warning btn-sm" asp-area="" asp-controller="Pagos" asp-action="CrearTicket" asp-route-id="@Model.ID" style=" margin-left: 20px; width: 80px;">
+                        <i class="fas fa-print"></i>
+                        Ticket
+                    </a>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <a class="btn btn-success btn-sm" asp-controller="Pagos" asp-action="ReciboPDF" asp-route-id="@Model.ID" style=" margin-left: 20px; width: 80px;">
+                        <i class="fas fa-print"></i>
+                        Recibo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>

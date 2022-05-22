@@ -1,0 +1,85 @@
+﻿@model RafaelReyesSpindola.Models.Inscripcion
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div>    
+    <div class="col-md-12">
+        <h1>Detalles</h1>
+        <button type="button" class="btn btn-outline-dark btn-sm" OnClick="javascript: return history.back()" style="float: right">
+            <i class="fas fa-arrow-left"></i>
+            Volver
+        </button>
+        <h4>Inscripción</h4>
+        <br />
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-outline-dark btn-sm" asp-area="" asp-action="FichaPDF" asp-route-id="@Model.ID" style="float: left">
+                    <i class="fas fa-print"></i>
+                    Generar Ficha
+                </a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary btn-sm" asp-area="" asp-controller="Pagos"
+                   asp-action="Create" asp-route-id="@Model.EstudianteID" style="float: right">
+                    Asignar pagos al estudiante
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="col-md-12 justify-content-center">
+        <div class="container shadow-sm" style="padding: 40px; border: 1px solid #0E76BB;">
+
+            <div style="background-color: #DBE3F0;
+                        padding: 5px; padding-bottom: 5px;
+                        padding-top: 10px;
+                        margin-bottom: -5px;">
+                <h5>DATOS DE INSCRIPCIÓN</h5>
+            </div>
+            <hr style="height: 2px; background-color: #0E76BB" />
+            <table class="table table-hover table-sm table-borderless table-striped">
+
+                <tbody>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.FechaInscripcion):</th>
+                        <td>@Html.DisplayFor(model => model.FechaInscripcion)</td>
+                        <th>@Html.DisplayNameFor(model => model.Folio):</th>
+                        <td>@Html.DisplayFor(model => model.Folio)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Estudiante):</th>
+                        <td colspan="3">
+                            <a asp-controller="Estudiantes" asp-action="Details" asp-route-id="@Model.Estudiante.ID" style="text-decoration: none;">
+                                 @Html.DisplayFor(model => model.Estudiante.NombreMatricula)
+                            </a>
+                           
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.CicloEscolar):</th>
+                        <td colspan="3">@Html.DisplayFor(model => model.CicloEscolar.CicloCompleto)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Grado):</th>
+                        <td>@Html.DisplayFor(model => model.Grado.Nombre) años</td>
+                        <th>@Html.DisplayNameFor(model => model.Grupo):</th>
+                        <td>@Html.DisplayFor(model => model.Grupo.NombreGrupo)</td>
+                    </tr>                   
+                    
+                </tbody>
+            </table>
+           
+            <hr />
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.ID">Editar</a> |
+                <a asp-action="Index">Ir al listado de inscripciones</a>
+            </div>
+        </div>
+    </div>    
+</div>
+
+

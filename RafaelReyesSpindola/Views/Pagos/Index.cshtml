@@ -1,0 +1,269 @@
+﻿@model RafaelReyesSpindola.Models.SchoolViewModels.PagoIndexData
+
+@{
+    ViewData["Title"] = "Pagos";
+}
+
+<h1>Registro de pagos</h1>
+
+<p>
+    <a class="btn btn-success btn-sm"  asp-area="" asp-controller="Estudiantes">Nuevo Pago</a>
+</p>
+<hr />
+<div id="accordionExample">
+    <div class="row">        
+        <div class="col col-5">
+            <div class="btn-group" role="group">
+                <button id="headingOne" class="btn btn btn-primary btn-sm collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Buscar por atributo
+                </button>
+                <button id="headingTwo" class="btn btn btn-outline-dark btn-sm collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Búsqueda avanzada
+                </button>
+            </div>
+
+        </div>
+        <div class="col-5">
+            <a asp-action="Index" style="float: left;">
+                Ver todos los pagos
+            </a>
+        </div>
+        <div class="col-2">
+            @if (ViewData["CurrentFilter"] != null)
+            {
+                <button form="FormSearch" type="submit" class="btn btn-primary btn-sm" asp-action="PagoPDF" method="get" style="display:none; float: right; ">
+                    <i class="fas fa-book"></i>
+                    PDF
+                </button>
+            }
+            else if (ViewData["CurrentFilterFecha"] != null)
+            {
+                <button form="FormSearchDate" type="submit" class="btn btn-outline-dark btn-sm" asp-action="PagoPDF" method="get" style="display:none; float: right">
+                    <i class="fas fa-book"></i>
+                    PDF
+                </button>
+            }
+            else
+            {
+                <a  class="btn btn-warning btn-sm" asp-action="PagoPDF" method="get" style="display:none; float: right">
+                    <i class="fas fa-book"></i>
+                    PDF
+                </a>
+            }
+
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col">
+            <hr />
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <form id="FormSearch" asp-action="Index" method="get" class="form-inline alert alert-info" style="padding-bottom:0px;">
+                    <div class="row" style="width: 100%; margin-bottom: -4px;">
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Buscar:</span>
+                                </div>
+                                <input type="text" class="form-control" aria-describedby="basic-addon1" name="SearchAtributo" value="@ViewData["CurrentFilter"]"/>
+                            </div>
+
+                        </div>                       
+                        <div class="col">
+                            <button type="submit" class="btn btn-success"  style="float: left">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <form id="FormSearchDate" asp-action="Index" method="get" class="form-inline alert alert-info" style="padding-bottom:0px;">
+                    <div class="row" style="width: 100%; margin-bottom: -4px;">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Desde:</span>
+                                </div>
+                                <input type="date" class="form-control" aria-describedby="basic-addon1" name="SearchFecha" value="@ViewData["CurrentFilterFecha"]" />
+                            </div>
+
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Hasta:</span>
+                                </div>
+                                <input type="date" class="form-control" aria-describedby="basic-addon1" name="SearchFecha" value="@ViewData["CurrentFilterFecha"]" />
+                            </div>
+
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Estado:</span>
+                                </div>
+                                <select class="form-control" name="SearchGrado" value="@ViewData["CurrentFilterGrado"]">
+                                    <option value="pagado">Pagado</option>
+                                    <option value="Adeudado">Adeudado</option>
+                                    <option value="Adeudado">Todos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Estudiante:</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Matrícula" aria-describedby="basic-addon1" name="SearchFecha" value="@ViewData["CurrentFilterFecha"]" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" style="width: 100%; margin-bottom: -4px;">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Monto desde:</span>
+                                </div>
+                                <input type="number" class="form-control" aria-describedby="basic-addon1" name="SearchFecha" value="@ViewData["CurrentFilterFecha"]" />
+                            </div>
+
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Monto hasta:</span>
+                                </div>
+                                <input type="number" class="form-control" aria-describedby="basic-addon1" name="SearchFecha" value="@ViewData["CurrentFilterFecha"]" />
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Pagado:</span>
+                                </div>
+                                <input type="number" class="form-control" aria-describedby="basic-addon1" name="SearchFecha" value="@ViewData["CurrentFilterFecha"]" />
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="input-group input-group-sm mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Restante:</span>
+                                </div>
+                                <input type="number" class="form-control" aria-describedby="basic-addon1" name="SearchFecha" value="@ViewData["CurrentFilterFecha"]" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="width: 100%; margin-bottom: 10px;">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success btn-sm" style="float: right">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Folio </th>
+            <th>Estudiante</th>
+            <th>Fecha de Pago</th>
+            <th>Recargo</th>
+            <th>Total a Pagar</th>
+            <th>Monto Pagado</th>
+            <th>Monto Restante</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Pagos)
+        {
+            string selectedRow = "";
+            if (item.ID == (int?)ViewData["PagoID"])
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Folio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estudiante.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaPago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Recargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPagar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoPagado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoRestante)
+                </td>
+                <!--<td>
+                    @{
+                        foreach (var concepto in item.ListaConceptos)
+                        {
+                            @concepto.ConceptoPago.ID @:  @concepto.ConceptoPago.Nombre <br />
+                        }
+                    }
+                </td>-->
+                <td>
+                    <div class="row">
+                        <a class="col" asp-action="Index" asp-route-id="@item.ID">
+                            <div class="sb-nav-link-icon"><i class="fas fa-caret-down" style="color: #007BFF"></i></div>
+                        </a>
+                        <a class="col" asp-action="Details" asp-route-id="@item.ID">
+                            <div class="sb-nav-link-icon"><i class="fas fa-eye" style="color: #007BFF"></i></div>
+                        </a>
+                        <a class="col" asp-action="Edit" asp-route-id="@item.ID">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900"></i></div>
+                        </a>
+                        <a class="col" asp-action="Delete" asp-route-id="@item.ID">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235"></i></div>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.ConceptosPago != null)
+{
+    <h3>Conceptos del pago seleccionado</h3>
+    <table class="table">
+        <tr>
+            <th>Nombre</th>
+            <th>Tarifa</th>
+            <th>Periodo</th>
+        </tr>
+
+        @foreach (var item in Model.ConceptosPago)
+        {            
+            <tr >               
+                <td>
+                    @item.Nombre
+                </td>
+                <td>
+                    @item.Tarifa
+                </td>
+                <td>
+                    @item.PeriodoPago
+                </td>
+            </tr>
+        }
+
+    </table>
+}

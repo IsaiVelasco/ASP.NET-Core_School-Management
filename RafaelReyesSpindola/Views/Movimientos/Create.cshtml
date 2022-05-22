@@ -1,0 +1,73 @@
+﻿@model RafaelReyesSpindola.Models.Movimiento
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Crear</h1>
+
+<h4>Movimiento</h4>
+<hr />
+<div class="row container">
+    <div class="col-md-11">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col-4">
+                    <label asp-for="CajaID" class="control-label"></label>
+                    <select asp-for="CajaID" class="form-control" asp-items="ViewBag.CajaID"></select>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Fecha" class="control-label"></label>
+                    <input type="datetime-local" asp-for="Fecha" class="form-control" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">                
+                <div class="form-group col">
+                    <label asp-for="Accion" class="control-label"></label>
+                    <select asp-for="Accion" class="form-control">
+                        <option>Ingreso</option>
+                        <option>Egreso</option>
+                    </select>
+                    <span asp-validation-for="TipoMovimiento" class="text-danger"></span>
+                </div>
+                <div class="form-group col">
+                    <label asp-for="Monto" class="control-label"></label>
+                    <input type="number" asp-for="Monto" class="form-control" />
+                    <span asp-validation-for="Monto" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col">
+                    <label asp-for="TipoMovimiento" class="control-label"></label>
+                    <select asp-for="TipoMovimiento" class="form-control">
+                        <option>Depósito</option>
+                        <option>Retiro</option>
+                        <option>Pago</option>
+                        <option>Abono</option>
+                    </select>
+                    <span asp-validation-for="TipoMovimiento" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-secondary" OnClick="javascript: return history.back()" style="float: left">
+                        Cancelar
+                    </button>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="submit" value="Registrar" class="btn btn-primary" style="float: right" />
+                    </div>
+                </div>
+            </div>           
+        </form>
+        <hr />
+        <div>
+            <a asp-action="Index">Ver lista general de movimientos</a>
+        </div>
+    </div>
+</div>
+
+
+

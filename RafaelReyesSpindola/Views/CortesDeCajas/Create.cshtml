@@ -1,0 +1,170 @@
+﻿@model RafaelReyesSpindola.Models.CorteDeCaja
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<script src="~/js/corte.js" type="text/javascript"></script>
+
+<h1>Registrar</h1>
+
+<h4>Corte De Caja</h4>
+<hr />
+<div class="row container">
+    <div class="col-md-11">
+        <form asp-action="Create" name="formu2">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="form-group col">
+                    <label asp-for="CajaID" class="control-label"></label>
+                    <select asp-for="CajaID" class="form-control" asp-items="ViewBag.CajaID"></select>
+                </div>
+                <div class="form-group col">
+                    <label asp-for="UsuarioID" class="control-label"></label>
+                    <select asp-for="UsuarioID" class="form-control" asp-items="ViewBag.UsuarioID"></select>
+                </div>
+                <div class="form-group col">
+                    <label asp-for="Fecha" class="control-label">Fecha</label>
+                    <input asp-for="Fecha" class="form-control" value="" />
+                    <span asp-validation-for="Fecha" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col">
+                    <label asp-for="Contado" class="control-label"></label>
+                    <input id="pagado" asp-for="Contado" class="form-control" type="number" min="0" value=""
+                           placeholder="Efectivo en caja física" onkeyup="obtenerValor()" />
+                    <span asp-validation-for="Contado" class="text-danger"></span>
+                </div>
+                <div class="form-group col">
+                    <label asp-for="Calculado" class="control-label"></label>
+                    <input name="totalpagar" asp-for="Calculado" class="form-control bg-white text-info" type="number"
+                           min="0" readonly value="@Model.Caja.MontoEfectivo" style="font-weight: bold;" />
+                    <span asp-validation-for="Calculado" class="text-danger"></span>
+                </div>
+                <div class="form-group col">
+                    <label asp-for="Diferencia" class="control-label"></label>
+                    <input id="restante" asp-for="Diferencia" class="form-control" type="number"
+                           min="0" value="" style="font-weight: bold;" />
+                    <span asp-validation-for="Diferencia" class="text-danger"></span>
+                </div>
+            </div>
+            <div>
+                <a class="btn btn-outline-secondary btn-sm" id="icollapse" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" style="float: left;">
+                    <i class="fas fa-user-graduate"></i>
+                    Detallar Corte de caja
+                </a>
+            </div>
+            <br />
+            <hr />
+            <div class="collapse" id="collapse" style="margin-top: -10px; margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-header" style="padding-bottom: 0px;">
+                        <h6 class="card-title">
+                            Ingrese el conteo de billetes y monedas
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p>Ingrese la cantidad de billetes en el valor correspondiente</p>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label asp-for="B1000" class="control-label"></label>
+                                <input asp-for="B1000" class="form-control" />
+                                <span asp-validation-for="B1000" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="B500" class="control-label"></label>
+                                <input asp-for="B500" class="form-control" />
+                                <span asp-validation-for="B500" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="B200" class="control-label"></label>
+                                <input asp-for="B200" class="form-control" />
+                                <span asp-validation-for="B200" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="B100" class="control-label"></label>
+                                <input asp-for="B100" class="form-control" />
+                                <span asp-validation-for="B100" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="B50" class="control-label"></label>
+                                <input asp-for="B50" class="form-control" />
+                                <span asp-validation-for="B50" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="B20" class="control-label"></label>
+                                <input asp-for="B20" class="form-control" />
+                                <span asp-validation-for="B20" class="text-danger"></span>
+                            </div>
+                            <div class="col">
+
+                            </div>
+                        </div>
+                        <hr />
+                        <p>Ingrese la cantidad de monedas en el valor correspondiente</p>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label asp-for="M10" class="control-label"></label>
+                                <input asp-for="M10" class="form-control" />
+                                <span asp-validation-for="M10" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="M5" class="control-label"></label>
+                                <input asp-for="M5" class="form-control" />
+                                <span asp-validation-for="M5" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="M2" class="control-label"></label>
+                                <input asp-for="M2" class="form-control" />
+                                <span asp-validation-for="M2" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="M1" class="control-label"></label>
+                                <input asp-for="M1" class="form-control" />
+                                <span asp-validation-for="M1" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="C50" class="control-label"></label>
+                                <input asp-for="C50" class="form-control" />
+                                <span asp-validation-for="C50" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="C20" class="control-label"></label>
+                                <input asp-for="C20" class="form-control" />
+                                <span asp-validation-for="C20" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col">
+                                <label asp-for="C10" class="control-label"></label>
+                                <input asp-for="C10" class="form-control" />
+                                <span asp-validation-for="C10" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-secondary" OnClick="javascript: return history.back()" style="float: left">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver
+                    </button>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="submit" value="Registrar" class="btn btn-primary" style="float: right;" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div>
+                <a asp-action="Index">Listado de cortes de caja</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

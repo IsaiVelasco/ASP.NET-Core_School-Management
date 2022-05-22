@@ -1,0 +1,107 @@
+﻿@model RafaelReyesSpindola.Models.Estudiante
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+<button type="button" class="btn btn-outline-dark btn-sm" OnClick="javascript: return history.back()" style="float: right">
+    <i class="fas fa-arrow-left"></i>
+    Volver
+</button>
+<div>
+    <h4>Estudiante</h4>
+    
+    <hr />
+    <div class="card">
+        <div class="card-header" style="padding-bottom: 5px;">
+            <div class="row">
+                <h6 class="card-title col" style="margin-bottom: 0px;">@Html.DisplayFor(model => model.NombreCompleto)</h6>
+                <div class="col-3">
+                    <h6 class="badge badge-warning" style="float:right;">
+                        Matrícula: @Html.DisplayFor(model => model.Matricula)
+                    </h6>
+                </div>
+            </div>
+        </div>        
+        <div class="card-body">
+
+            <table class="table table-hover table-sm table-borderless">
+
+                <tbody>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Nombre):</th>
+                        <td>@Html.DisplayFor(model => model.Nombre)</td>
+                        <th>@Html.DisplayNameFor(model => model.ApellidoPaterno):</th>
+                        <td>@Html.DisplayFor(model => model.ApellidoPaterno)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.ApellidoMaterno):</th>
+                        <td>@Html.DisplayFor(model => model.ApellidoMaterno)</td>
+                        <th>@Html.DisplayNameFor(model => model.TipoSangre):</th>
+                        <td>@Html.DisplayFor(model => model.TipoSangre.NombreTipo)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Edad):</th>
+                        <td>@Html.DisplayFor(model => model.Edad) años</td>
+                        <th>@Html.DisplayNameFor(model => model.FechaNacimiento):</th>
+                        <td>@Html.DisplayFor(model => model.FechaNacimiento)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.EscuelaProcedencia):</th>
+                        <td>@Html.DisplayFor(model => model.EscuelaProcedencia.Nombre)</td>
+                        <th>@Html.DisplayNameFor(model => model.PromedioProcedencia):</th>
+                        <td>@Html.DisplayFor(model => model.PromedioProcedencia)</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Tutor)</th>
+                        <th>@Html.DisplayFor(model => model.Tutor.NombreMatricula)</th>
+                        <th>Inscrito actualmente al ciclo:</th>
+                        @if(Model.Inscripciones.Count()!= 0){
+                            <td><a style="text-decoration: none;" asp-controller="Inscripciones" asp-action="Details" asp-route-id="@Model.Inscripciones.Last().ID">
+                            @Html.DisplayFor(model => model.Inscripciones.Last().CicloEscolar.CicloCompleto)
+                            </a></td>
+                        }else{
+                            <td style="font-style:italic;">No inscrito</td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            
+            <div class="row">
+                <div class ="col">
+                    @foreach (var item in Model.PagosAtrasdos(Model.Pagos, Model.Inscripciones))
+                    {<ul class="list-group" style="margin-bottom: 3px;">
+                       <li class="list-group-item list-group-item-danger" >
+                           <span class="badge badge-danger"><i class="fas fa-bell"></i></span> 
+                             Pago retrasado | colegiatura de  <span class="badge badge-light" style="color:#0c0c0c; font-size: 13px; font-style:initial;">  @item </span>
+                       </li> 
+                     </ul>                
+                   }
+                    
+                </div>
+                <div class = "col">
+                </div>
+            </div> 
+              
+            
+            
+           <br />
+            <div class="row">
+                <div class="col-auto">
+                    <a class="btn btn-secondary" asp-area="" asp-controller="Pagos" asp-action="Create" asp-route-id="@Model.ID">Asignar Pago</a>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-primary" asp-area="" asp-controller="Inscripciones" asp-action="Create" asp-route-id="@Model.ID">Inscribir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>

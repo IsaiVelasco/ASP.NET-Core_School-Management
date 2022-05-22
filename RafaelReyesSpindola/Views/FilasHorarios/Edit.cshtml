@@ -1,0 +1,79 @@
+﻿@model RafaelReyesSpindola.Models.FilaHorario
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>FilaHorario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="HorarioID" class="control-label"></label>
+                <select asp-for="HorarioID" class="form-control" asp-items="ViewBag.HorarioID"></select>
+                <span asp-validation-for="HorarioID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoraEntrada" class="control-label"></label>
+                <input type="time" asp-for="HoraEntrada" class="form-control" />
+                <span asp-validation-for="HoraEntrada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoraSalida" class="control-label"></label>
+                <input type="time" asp-for="HoraSalida" class="form-control" />
+                <span asp-validation-for="HoraSalida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaUno" class="control-label"></label>
+                <select asp-for="DiaUno" class="form-control" asp-items="ViewBag.MateriaNombre"></select>
+                <span asp-validation-for="DiaUno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaDos" class="control-label"></label>
+                <select asp-for="DiaDos" class="form-control" asp-items="ViewBag.MateriaNombre"></select>
+                <span asp-validation-for="DiaDos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaTres" class="control-label"></label>
+                <select asp-for="DiaTres" class="form-control" asp-items="ViewBag.MateriaNombre"></select>
+                <span asp-validation-for="DiaTres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaCuatro" class="control-label"></label>
+                <select asp-for="DiaCuatro" class="form-control" asp-items="ViewBag.MateriaNombre"></select>
+                <span asp-validation-for="DiaCuatro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaCinco" class="control-label"></label>
+                <select asp-for="DiaCinco" class="form-control" asp-items="ViewBag.MateriaNombre"></select>
+                <span asp-validation-for="DiaCinco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaSeis" class="control-label"></label>
+                <input asp-for="DiaSeis" class="form-control" />
+                <span asp-validation-for="DiaSeis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaSiete" class="control-label"></label>
+                <input asp-for="DiaSiete" class="form-control" />
+                <span asp-validation-for="DiaSiete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

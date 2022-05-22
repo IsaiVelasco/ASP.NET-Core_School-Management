@@ -1,0 +1,323 @@
+﻿@using RafaelReyesSpindola.Helper
+@using System.Security.Claims;
+@using System.Security.Principal;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Rafael Reyes Spindola</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+
+</head>
+@if (User.Identity.IsAuthenticated)
+{
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark shadow-sm p-2 mb-5" style="background: #2C327E; height: 50px;">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Rafael Reyes Spindola</a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <ul class="navbar-nav ml-auto ml-mr-0">
+            <li class="nav-item dropdown">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user fa-fw"></i>
+                        @SessionHelper.GetName(User)
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Details" asp-route-id="@SessionHelper.GetNameIdentifier(User)">Mi cuenta</a>
+                        <a class="dropdown-item" href="#">@(((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Email).Value)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Logout">Cerrar sesión</a>
+                    </div>
+                }
+                else
+                {
+                    <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">
+                        <i class="fas fa-user fa-fw"></i>
+                        Iniciar Sesión
+                    </a>
+                }
+
+
+            </li>
+        </ul>
+    </nav>
+
+    <!--Inicio de Sidevar-->
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-light shadow" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="">
+                            <img class="" src="~/images/logo-tr.png"
+                                 style="height: 120px; display:block; margin: auto; margin-top: 15px;">
+                            <hr style="margin-bottom: -10px;">
+                        </div>
+                        <div class="sb-sidenav-menu-heading">HOME</div>
+
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                            Inicio
+                        </a>
+
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Cajero"))
+                        {
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCaja" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                Caja
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseCaja" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" asp-area="" asp-controller="Estudiantes" asp-action="Index">Registrar pago</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Cajas" asp-action="Index">Cajas y Movimientos</a>
+                                </nav>
+                            </div>
+                        }
+
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Director"))
+                        {
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConf" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cog fa-spin"></i></div>
+                                Configuración
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseConf" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                    @if (User.IsInRole("Administrador"))
+                                    {
+                                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesSistema" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                            Modulos estáticos
+                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                        </a>
+                                        <div class="collapse" id="pagesSistema" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                            <nav class="sb-sidenav-menu-nested nav">
+                                                <a class="nav-link" asp-area="" asp-controller="TiposSangre" asp-action="Index">Tipos de sangre</a>
+                                                <a class="nav-link" asp-area="" asp-controller="ConceptosPagos" asp-action="Index">Conceptos de pago</a>
+                                                <a class="nav-link" asp-area="" asp-controller="CiclosEscolares" asp-action="Index">Ciclos Escolares</a>
+                                                <a class="nav-link" asp-area="" asp-controller="TiposMaterias" asp-action="Index">Tipos de Materias</a>
+                                            </nav>
+                                        </div>
+                                        <a class="nav-link" href="layout-static.html">Respaldos</a>
+                                    }
+
+                                </nav>
+                            </div>
+                        }
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Director"))
+                        {
+                            <div class="sb-sidenav-menu-heading">DOCENTES Y ALUMNOS</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAlumnos" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-child"></i></div>
+                                Alumnos
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseAlumnos" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="inscribir-alumno.html">Inscribir alumno</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Inscripciones" asp-action="Index">Fichas de inscripción</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Estudiantes" asp-action="Index">Consultar alumnos</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Tutores" asp-action="Index">Consultar tutores</a>
+
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-address-book"></i></div>
+                                Docentes
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        No disponible
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <!--
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="login.html">Login</a>
+                                            <a class="nav-link" href="register.html">Register</a>
+                                            <a class="nav-link" href="password.html">Forgot Password</a>
+                                        </nav>
+                                    </div>
+                                    -->
+                                    <!--
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Registrar docentes
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="401.html">401 Page</a>
+                                            <a class="nav-link" href="404.html">404 Page</a>
+                                            <a class="nav-link" href="500.html">500 Page</a>
+                                        </nav>
+                                    </div>-->
+                                </nav>
+                            </div>
+                        }
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Director"))
+                        {
+                            <div class="sb-sidenav-menu-heading">ACADÉMICO</div>
+
+                            <a class="nav-link" asp-area="" asp-controller="Materias" asp-action="Index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                Materias
+                            </a>
+
+                            <a class="nav-link" asp-area="" asp-controller="Horarios" asp-action="Index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                                Horarios
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="Grados" asp-action="Index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-graduation-cap"></i></div>
+                                Grados/Niveles
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="Grupos" asp-action="Index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                Grupos
+                            </a>
+                        }
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Cajero"))
+                        {
+                            <div class="sb-sidenav-menu-heading">INFORMES</div>
+                            <a class="nav-link" asp-area="" asp-controller="Cajas" asp-action="Index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Realizar corte de caja
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="Pagos" asp-action="Index">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Pagos por alumnos
+                            </a>
+                        }
+
+
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Sesión como:</div>
+                        @foreach (var claim in User.Claims)
+                        {
+
+                            @if (claim.Type.Equals(ClaimTypes.Role))
+                            {
+                                 @claim.Value <b> </b>
+                            }
+                        }
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main role="main" class="pb-3">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    @{
+                        string format = "MM/yyyy"; 
+                        var now = DateTime.Now.ToString(format);
+                    
+                    }
+                    &copy; @(now) - Rafael Reyes Spindola - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!--Fin de Sidebar-->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/scripts.js" asp-append-version="true"></script>
+
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+
+    <script src="~/assets/demo/chart-area-demo.js"></script>
+    <script src="~/assets/demo/chart-bar-demo.js"></script>
+    <script src="~/assets/demo/datatables-demo.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+}
+else
+{
+<body class="">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark shadow-sm p-2 mb-5" style="background: #2C327E; height: 50px;">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Rafael Reyes Spindola</a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <ul class="navbar-nav ml-auto ml-mr-0">
+            <li class="nav-item dropdown">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user fa-fw"></i>
+                        @SessionHelper.GetName(User)
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Details" asp-route-id="@SessionHelper.GetNameIdentifier(User)">Mi cuenta</a>
+                        <a class="dropdown-item" href="#">@(((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Email).Value)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Logout">Cerrar sesión</a>
+                    </div>
+                }
+                else
+                {
+                    <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">
+                        <i class="fas fa-user fa-fw"></i>
+                        Iniciar Sesión
+                    </a>
+                }
+
+
+            </li>
+        </ul>
+    </nav>
+
+    <main role="main" class="pb-3">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </main>
+    <footer class="bg-light border-top footer text-muted">
+        <div class="container-fluid">
+            @{
+                string format = "MM/yyyy"; 
+                var now = DateTime.Now.ToString(format);
+                    
+            }
+            &copy; @(now) - Rafael Reyes Spindola - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+        </div>
+    </footer>
+    <!--Fin de Sidebar-->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/scripts.js" asp-append-version="true"></script>
+
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+
+    <script src="~/assets/demo/chart-area-demo.js"></script>
+    <script src="~/assets/demo/chart-bar-demo.js"></script>
+    <script src="~/assets/demo/datatables-demo.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+}
+
+</html>

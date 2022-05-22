@@ -1,0 +1,213 @@
+﻿@model RafaelReyesSpindola.Models.SchoolViewModels.CajaMovimientos;
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Caja</h4>
+    <hr />
+    <div class="row">
+        <dl class="row col">
+            <dt class="col-sm-2">
+                Nombre:
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Caja.Nombre
+            </dd>
+            <dt class="col-sm-2">
+                Usuario
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Caja.Usuario.NombreUsuario
+            </dd>
+        </dl>
+        <div class="col row">
+            <h2 class="col">Efectivo:  <strong class="text-success">$@Model.Caja.MontoEfectivo</strong></h2>
+            <div class="col">
+                <a class="btn btn-warning btn-sm" asp-area="" asp-controller="CortesDeCajas" asp-action="Create" asp-route-id="@Model.Caja.ID" style="float: right; margin-top: 10px;">
+                    <i class="fas fa-cash-register"></i>
+                    Corte de Caja
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<div id="accordionExample">
+    <div class="row">
+        <div class="col-2">
+            <a class="btn btn-success btn-sm" asp-area="" asp-controller="Movimientos" asp-action="Create" asp-route-id="@Model.Caja.ID" style="float: left;">
+                <i class="fas fa-dollar-sign"></i>
+                Añadir Movimiento
+            </a>
+        </div>
+        <div class="col col-3">
+            <div class="btn-group" role="group">
+                <button id="headingOne" class="btn btn btn-outline-dark btn-sm collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Filtrar por rango
+                </button>
+                <button id="headingTwo" class="btn btn btn-outline-dark btn-sm collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Filtrar por día
+                </button>
+            </div>
+
+        </div>
+        <div class="col-5">
+            <a asp-action="Details" asp-route-id="@Model.Caja.ID" style="float: left;">
+                Ver todos los movimientos
+            </a>
+        </div>
+        <div class="col-2">
+            @if (ViewData["CurrentFilterDesde"] != null && ViewData["CurrentFilterHasta"] != null)
+            {
+                <button type="submit" form="FormRango" class="btn btn-outline-dark btn-sm" asp-area="" asp-action="ReporteCajaPDF" asp-route-id="@Model.Caja.ID" style="float: right">
+                    <i class="fas fa-book"></i>
+                    PDF
+                </button>
+            }
+            else if (@ViewData["CurrentFilter"] != null)
+            {
+                <button type="submit" form="FormDia" class="btn btn-outline-danger btn-sm" asp-area="" asp-action="ReporteCajaPDF" asp-route-id="@Model.Caja.ID" style="float: right">
+                    <i class="fas fa-book"></i>
+                    PDF
+                </button>
+            }
+            else
+            {
+                <a class="btn btn-primary btn-sm" asp-area="" asp-action="ReporteCajaPDF" asp-route-id="@Model.Caja.ID" style="float: right">
+                    <i class="fas fa-book"></i>
+                    PDF
+                </a>
+            }
+
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col">
+            <hr />
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <form id="FormRango" asp-action="Details" method="get" class="form-inline alert alert-info" style="padding-bottom:0px;">
+                    <div class="row" style="width: 100%; margin-bottom: -4px;">
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Desde:</span>
+                                </div>
+                                <input type="date" class="form-control" aria-describedby="basic-addon1" name="SearchDesde" value="@ViewData["CurrentFilterDesde"]" />
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Hasta:</span>
+                                </div>
+                                <input type="date" class="form-control" aria-describedby="basic-addon1" name="SearchHasta" value="@ViewData["CurrentFilterHasta"]" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-success" asp-route-id="@Model.Caja.ID" style="float: left">
+                                <i class="fas fa-search-dollar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <form id="FormDia" asp-action="Details" method="get" class="form-inline alert alert-info" style="padding-bottom:0px;">
+                    <div class="row" style="width: 100%; margin-bottom: -4px;">
+                        <div class="col-4">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Fecha:</span>
+                                </div>
+                                <input type="date" class="form-control" aria-describedby="basic-addon1" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-success" asp-route-id="@Model.Caja.ID" style="float: left">
+                                <i class="fas fa-search-dollar"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="alert-warning shadow-sm rounded-lg" style="padding:3px; margin-bottom: 15px;">
+    <div class="row" style="margin-left: 2px;">
+        <div class="col-2"><p style="color: black; margin-bottom: 0px;">Cálculos de la tabla: </p></div>
+        <div class="col-2"><p style="color: black; margin-bottom: 0px;"><strong>Ingresos: </strong>@Model.TotalIngresos</p></div>
+        <div class="col-2"><p style="color: black; margin-bottom: 0px;"><strong>Egresos: </strong>@Model.TotalEgresos</p></div>
+        <div class="col-2"><p style="color: black; margin-bottom: 0px;"><strong>Diferencia: </strong>@Model.Diferencia</p></div>
+    </div>
+</div>
+
+@if (Model.Caja.Movimientos != null)
+{
+    if (Model.Caja.Movimientos.Count != 0)
+    {
+        <table class="table table-sm table-striped table-bordered">
+            <thead class="alert alert-info">
+                <tr style="color: black;">
+                    <th style="width: 50px;">ID</th>
+                    <th>Acción</th>
+                    <th>Monto</th>
+                    <th>Fecha</th>
+                    <th>Tipo de Movimiento</th>
+                    <th style="width: 55px;"></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model.Caja.Movimientos)
+            {
+                <tr>
+                    <td>
+                        @item.ID
+                    </td>
+                    <td>
+                        @item.Accion
+                    </td>
+                    <td>
+                        @item.Monto
+                    </td>
+                    <td>
+                        @item.Fecha.ToLongDateString(), @item.Fecha.ToShortTimeString()
+                    </td>
+                    <td>
+                        @item.TipoMovimiento
+                    </td>
+                    <td>
+                        <div class="row">
+                            <a class="col-1 disabled" asp-controller="Movimientos" asp-action="Delete" asp-route-id="@item.ID">
+                                <div class="sb-nav-link-icon"><i class="fas fa-times" style="color: #DC3545"></i></div>
+                            </a>
+                            <a class="col-1" asp-controller="Movimientos" asp-action="Edit" asp-route-id="@item.ID">
+                                <div class="sb-nav-link-icon"><i class="fas fa-pen" style="color: #007BFF"></i></div>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+        <h6 style="margin-bottom: 20px;" class="text-danger">No hay movimientos para mostrar</h6>
+    }
+}
+<hr />
+<br />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Caja.ID">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>
