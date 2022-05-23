@@ -1,6 +1,6 @@
 # School Management
 
-## Web application for managing the collection of school fees and school enrollment.
+### Web application for managing the collection of school fees and school enrollment.
 ### Documentation
 
 In progress...
