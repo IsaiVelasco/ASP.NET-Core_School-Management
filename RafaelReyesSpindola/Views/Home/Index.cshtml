@@ -48,81 +48,31 @@
 </div>
 
 <!--Info Students-->
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Matrícula
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NomParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Nombre</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ApPatParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Apellido Paterno</a>
-            </th>
-            <th>
-                Apellido Materno
-            </th>
-            <th>
-                Tipo de Sangre
-            </th>
-            <th>
-                Edad
-            </th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+<h2 class="mt-4">Estudiantes con pagos retrasados</h2>
+<div class="row">
+@{
+    int i = 0;
+    foreach (var item in Model)
+    {
+        if (item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count != 0)
         {
-            DateTime nacimiento = item.FechaNacimiento;
-            int edad = DateTime.Today.AddTicks(-nacimiento.Ticks).Year - 1;
-            if (item.Edad != edad)
-            {
-                item.Edad = edad;
-            }
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Matricula) 
-                    @if(item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count != 0)
-                    {
-                        
-                        <sup class="text-danger">Retrasos <span class="badge badge-danger">@item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count</span></sup>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApellidoPaterno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApellidoMaterno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoSangre.NombreTipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Edad)
-                </td>
-                <td>
-                    <div class="row">
-                        <a class="col" asp-action="Details" asp-route-id="@item.ID">
-                            <div class="sb-nav-link-icon"><i class="fas fa-sign-in-alt" style="color: #007BFF"></i></div>
-                        </a>
-                        <a class="col" asp-action="Edit" asp-route-id="@item.ID">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user-edit" style="color: #FF9900;"></i></div>
-                        </a>
-                        <a class="col" asp-action="Delete" asp-route-id="@item.ID">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user-times" style="color: #E94235;"></i></div>
-                        </a>
+            
+            <a asp-controller="Estudiantes" asp-action="Details" asp-route-id="@item.ID" style="text-decoration:none;">
+            <div class="col-xl-3 col-md-6">
+                <div class="card mb-4" style="border-block-color: lightgray; border-radius: 2px;">
+                    <div class="card-body">
+                        <i class="fas fa-circle" style="color: #55C13A;"></i>  @Html.DisplayFor(modelItem => item.Nombre)  @Html.DisplayFor(modelItem => item.ApellidoPaterno) - @Html.DisplayFor(modelItem => item.Matricula)
+                        <div class="text-danger" style="float: right;">Retrasos <span class="badge badge-danger">@item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count</span></div>
                     </div>
-                </td>
-            </tr>
+                </div>
+            </div>
+            </a>
+            
         }
-    </tbody>
-</table>
+     }
+}
+</div>
+
 
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
