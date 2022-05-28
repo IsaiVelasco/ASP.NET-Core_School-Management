@@ -109,6 +109,21 @@ namespace RafaelReyesSpindola.Data
                 context.Grados.Add(g);
             }
             context.SaveChanges();
+
+            var grupos = new Grupo[]
+            {
+            new Grupo{GradoID=6, NombreGrupo="A"},
+            new Grupo{GradoID=5, NombreGrupo="A"},
+            new Grupo{GradoID=4, NombreGrupo="A"},
+            new Grupo{GradoID=3, NombreGrupo="A"},
+            new Grupo{GradoID=2, NombreGrupo="A"},
+            new Grupo{GradoID=1, NombreGrupo="A"},
+            };
+            foreach (Grado g in grados)
+            {
+                context.Grados.Add(g);
+            }
+            context.SaveChanges();
         }
     }
 }
