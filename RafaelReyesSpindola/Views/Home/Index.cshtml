@@ -48,7 +48,8 @@
 </div>
 
 <!--Info Students-->
-<h2 class="mt-4">Estudiantes con pagos retrasados</h2>
+<hr/>
+<h2 class="mt-4">Estudiantes con pagos retrasados</h2> <br />
 <div class="row">
 @{
     int i = 0;
@@ -57,16 +58,18 @@
         if (item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count != 0)
         {
             
-            <a asp-controller="Estudiantes" asp-action="Details" asp-route-id="@item.ID" style="text-decoration:none;">
+            
             <div class="col-xl-3 col-md-6">
-                <div class="card mb-4" style="border-block-color: lightgray; border-radius: 2px;">
+                <a asp-controller="Estudiantes" asp-action="Details" asp-route-id="@item.ID" style="text-decoration:none;">
+                <div class="card mb-4" style="border-block-color: lightgray; border-radius: 2px; color:#666;">
                     <div class="card-body">
-                        <i class="fas fa-circle" style="color: #55C13A;"></i>  @Html.DisplayFor(modelItem => item.Nombre)  @Html.DisplayFor(modelItem => item.ApellidoPaterno) - @Html.DisplayFor(modelItem => item.Matricula)
+                        <i class="fa fa-circle fa-o" style="color: #17A2B8;"></i>  @Html.DisplayFor(modelItem => item.Nombre)  @Html.DisplayFor(modelItem => item.ApellidoPaterno) - @Html.DisplayFor(modelItem => item.Matricula)
                         <div class="text-danger" style="float: right;">Retrasos <span class="badge badge-danger">@item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count</span></div>
                     </div>
                 </div>
+                </a>
             </div>
-            </a>
+            
             
         }
      }
@@ -94,7 +97,7 @@
     Siguiente
 </a>
 <!--End Info Students-->
-
+<hr/>
 <div class="row">
     <div class="col-xl-6">
         <div class="card mb-4">
