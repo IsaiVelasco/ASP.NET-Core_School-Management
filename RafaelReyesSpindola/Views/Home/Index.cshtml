@@ -60,8 +60,8 @@
             
             
             <div class="col-xl-3 col-md-6">
-                <a asp-controller="Estudiantes" asp-action="Details" asp-route-id="@item.ID" style="text-decoration:none;">
-                <div class="card mb-4" style="border-block-color: lightgray; border-radius: 2px; color:#666;">
+                <a asp-controller="Estudiantes" asp-action="Details" asp-route-id="@item.ID" style="text-decoration:none; ">
+                <div class="card mb-4 card-late" style="color: #666;">
                     <div class="card-body">
                         <i class="fa fa-circle fa-o" style="color: #17A2B8;"></i>  @Html.DisplayFor(modelItem => item.Nombre)  @Html.DisplayFor(modelItem => item.ApellidoPaterno) - @Html.DisplayFor(modelItem => item.Matricula)
                         <div class="text-danger" style="float: right;">Retrasos <span class="badge badge-danger">@item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count</span></div>
