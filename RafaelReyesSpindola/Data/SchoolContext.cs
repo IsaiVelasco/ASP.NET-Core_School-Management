@@ -95,7 +95,7 @@ namespace RafaelReyesSpindola.Data
         }
         public DbSet<RafaelReyesSpindola.Models.CorteDeCaja> CorteDeCaja { get; set; }
 
+        public DbSet<RafaelReyesSpindola.Models.Printer> Printers { get; set; }
 
-        
     }
 }
