@@ -48,8 +48,22 @@
 </div>
 
 <!--Info Students-->
+<style>
+    .card-late {
+    border-block-color: #ddd;
+    border-radius: 2px;
+    color: #666;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+}
+.card-late:hover {
+    transition: all 0.1s;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 15%);
+    margin: -1.5px;
+    background: #fbfbfb;
+}
+</style>
 <hr/>
-<h2 class="mt-4">Estudiantes con pagos retrasados</h2> <br />
+<h2 class="mt-4" >Notificaciones de pagos retrasados</h2> <br />
 <div class="row">
 @{
     int i = 0;
@@ -64,7 +78,7 @@
                 <div class="card mb-4 card-late" style="color: #666;">
                     <div class="card-body">
                         <i class="fa fa-circle fa-o" style="color: #17A2B8;"></i>  @Html.DisplayFor(modelItem => item.Nombre)  @Html.DisplayFor(modelItem => item.ApellidoPaterno) - @Html.DisplayFor(modelItem => item.Matricula)
-                        <div class="text-danger" style="float: right;">Retrasos <span class="badge badge-danger">@item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count</span></div>
+                        <div class="text-info" style="float: right;">Retrasos <span class="badge badge-primary">@item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count</span></div>
                     </div>
                 </div>
                 </a>
