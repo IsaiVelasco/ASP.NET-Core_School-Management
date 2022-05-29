@@ -62,11 +62,32 @@
     background: #fbfbfb;
 }
 </style>
-<hr/>
-<h2 class="mt-4" >Notificaciones de pagos retrasados</h2> <br />
-<div class="row">
+
+<!--Verificando si hay retrasos, para poner el titulo de pagos retrasados-->
 @{
     int i = 0;
+    
+    foreach (var item in Model)
+    {
+        if (item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count != 0)
+        {
+            i++;
+        }
+    }
+
+    if (i!=0)
+    {
+        <hr/>
+        <a class="" asp-controller="Estudiantes" asp-action="Retrasos" style="text-decoration:none;  color:#000;;">
+        <h2 class="mt-4" >Estudiantes con pagos retrasados
+        </h2>
+        </a> <br />
+    }
+}
+
+<div class="row">
+@{
+    
     foreach (var item in Model)
     {
         if (item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count != 0)
@@ -78,7 +99,7 @@
                 <div class="card mb-4 card-late" style="color: #666;">
                     <div class="card-body">
                         <i class="fa fa-circle fa-o" style="color: #17A2B8;"></i>  @Html.DisplayFor(modelItem => item.Nombre)  @Html.DisplayFor(modelItem => item.ApellidoPaterno) - @Html.DisplayFor(modelItem => item.Matricula)
-                        <div class="text-info" style="float: right;">Retrasos <span class="badge badge-primary">@item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count</span></div>
+                        <div class="text-danger" style="float: right;">Retrasos <span class="badge badge-danger">@item.PagosAtrasdos(item.Pagos, item.Inscripciones).Count</span></div>
                     </div>
                 </div>
                 </a>
@@ -96,22 +117,27 @@
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-pageNumber="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @prevDisabled">
-    Anterior
-</a>
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-pageNumber="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @nextDisabled">
-    Siguiente
-</a>
+@{
+    if (i != 0)
+    {
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @prevDisabled">
+            Anterior
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @nextDisabled">
+            Siguiente
+        </a>
+    }
+}
 <!--End Info Students-->
-<hr/>
+<hr/> <br />
 <div class="row">
     <div class="col-xl-6">
         <div class="card mb-4">

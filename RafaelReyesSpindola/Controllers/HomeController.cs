@@ -98,7 +98,7 @@ namespace RafaelReyesSpindola.Controllers
                     estudiantes = estudiantes.OrderBy(s => s.ApellidoPaterno);
                     break;
             }
-            int pageSize = 4;
+            int pageSize = 8;
 
             //return View(await estudiantes.AsNoTracking().ToListAsync());
             return View(await PaginatedList<Estudiante>.CreateAsync(estudiantes.AsNoTracking(), pageNumber ?? 1, pageSize));
