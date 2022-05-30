@@ -165,8 +165,15 @@ namespace RafaelReyesSpindola.Controllers
             ticket.TextoCentro(" ");
             ticket.TextoCentro(" ");
             //ticket.CortaTicket();
-            ticket.ImprimirTicket("POS-58-Series");//Nombre de la impresora ticketera
-            
+            var printer = await _context.Printers.ToListAsync();
+            string printerName = "no-printer";
+            if (printer.Count() != 0)
+            {
+                printerName = printer.First().Nombre;
+            }
+            //ticket.ImprimirTicket("POS-58-Series");//Nombre de la impresora ticketera
+            ticket.ImprimirTicket(printerName);//Nombre de la impresora ticketera
+
             if (pago == null)
             {
                 return NotFound();
