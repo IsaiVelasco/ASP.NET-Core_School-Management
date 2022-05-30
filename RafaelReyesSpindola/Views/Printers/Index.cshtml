@@ -3,33 +3,59 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+<style>
+    .card-late {
+    border-block-color: #ddd;
+    border-radius: 2px;
+    color: #666;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
-    </tbody>
-</table>
+.card-late:hover {
+    transition: all 0.1s;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 15%);
+    margin: -1.5px;
+    
+}
+</style>
+<br />
+<h1 class="text-center">Impresora de Tickets</h1>
+
+@if(Model.Count() == 0)
+{
+    <br />
+    <p class="text-center">
+    <a class="btn btn-secondary" asp-action="Create" style="text-decoration:none;">Agregar impresora</a>
+    </p>
+}
+else
+{
+    <p class="text-center text-secondary">
+        El sistema solo soporta una impresora.
+    </p>
+}
+
+<br />
+<div class="row justify-content-center">
+    @foreach (var item in Model) {
+        <div class="col-xl-3 ">
+           
+
+            <div class="card mb-4 card-late" style="color: #666;">
+                
+                <div class="card-header">
+                    Detalles de la impresora asignada
+                </div>
+                <div class="card-body">
+                    <img class="card-img-top" src="https://i.postimg.cc/xqrh6y9y/print.jpg" alt="Card image cap" 
+                        style="width: 60px; border-radius:30px;">          
+                    <i class="fa fa-circle fa-o" style="color: #17A2B8;"></i>  @Html.DisplayFor(modelItem => item.Nombre)  
+
+                    <a class="" style="margin-left: 20px;color:black; text-decoration:none;" asp-action="Edit" asp-route-id="@item.ID">Renombrar</a> |                    
+                    <a class="text-secondary" style="text-decoration:none;" asp-action="Delete" asp-route-id="@item.ID">Quitar</a>
+                    
+                </div>
+            </div>
+        </div>    
+        
+    }
+</div>
