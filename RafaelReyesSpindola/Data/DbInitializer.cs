@@ -119,9 +119,9 @@ namespace RafaelReyesSpindola.Data
             new Grupo{GradoID=2, NombreGrupo="A"},
             new Grupo{GradoID=1, NombreGrupo="A"},
             };
-            foreach (Grado g in grados)
+            foreach (Grupo g in grupos)
             {
-                context.Grados.Add(g);
+                context.Grupos.Add(g);
             }
             context.SaveChanges();
         }
