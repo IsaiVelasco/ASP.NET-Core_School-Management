@@ -8,6 +8,10 @@
         text-decoration:none;
     }
 
+    .basic-link:hover{
+        text-decoration:none;
+    }
+
     .over-card:hover{
         opacity: 90%;
         transition: all .3s;
@@ -38,7 +42,7 @@
         </div>
     </div>
     <div class="col-xl-3 col-md-6">
-        <div class="card bg-warning text-white mb-4">
+        <div class="card bg-warning text-white mb-4 over-card">
             <div class="card-body">Consultar alumno</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
                 <a class="small text-white stretched-link basic-link" asp-area="" asp-controller="Estudiantes">Ir a la sección</a>
@@ -47,7 +51,7 @@
         </div>
     </div>
     <div class="col-xl-3 col-md-6">
-        <div class="card  text-white mb-4" style="background-color: #F38C1B;">
+        <div class="card  text-white mb-4 over-card" style="background-color: #F38C1B;">
             <div class="card-body">Crear horario</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
                 <a class="small text-white stretched-link basic-link" asp-area="" asp-controller="Horarios">Ir a la sección</a>
