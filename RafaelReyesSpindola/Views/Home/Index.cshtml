@@ -2,7 +2,12 @@
 
 @{
     ViewData["Title"] = "Home Page";
-}
+}<style>
+
+    .basic-link{
+        text-decoration:none;
+    }
+</style>
 
 <h1 class="mt-4">Inicio</h1>
 <ol class="breadcrumb mb-4">
@@ -13,7 +18,7 @@
         <div class="card bg-primary text-white mb-4">
             <div class="card-body">Realizar Pago</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" asp-area="" asp-controller="Estudiantes">Ir a la sección</a>
+                <a class="small text-white stretched-link basic-link" asp-area="" asp-controller="Estudiantes">Ir a la sección</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
             </div>
         </div>
@@ -22,7 +27,7 @@
         <div class="card bg-success text-white mb-4">
             <div class="card-body">Inscribir alumno</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" asp-area="" asp-controller="Tutores" asp-action="Index">Ir a la sección</a>
+                <a class="small text-white stretched-link basic-link" asp-area="" asp-controller="Tutores" asp-action="Index">Ir a la sección</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
             </div>
         </div>
@@ -31,7 +36,7 @@
         <div class="card bg-warning text-white mb-4">
             <div class="card-body">Consultar alumno</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" asp-area="" asp-controller="Estudiantes">Ir a la sección</a>
+                <a class="small text-white stretched-link basic-link" asp-area="" asp-controller="Estudiantes">Ir a la sección</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
             </div>
         </div>
@@ -40,7 +45,7 @@
         <div class="card  text-white mb-4" style="background-color: #F38C1B;">
             <div class="card-body">Crear horario</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" asp-area="" asp-controller="Horarios">Ir a la sección</a>
+                <a class="small text-white stretched-link basic-link" asp-area="" asp-controller="Horarios">Ir a la sección</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
             </div>
         </div>
