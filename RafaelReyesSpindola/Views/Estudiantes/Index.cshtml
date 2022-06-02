@@ -3,11 +3,15 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<style>
+    .text-dec{
+        text-decoration:none;
+    }
+</style>
 <h1>Lista de estudiantes</h1>
 
 <p>
-    <a asp-area="" asp-controller="Tutores" style="text-decoration:none;"><i class="fas fa-plus"></i> Inscribir estudiante</a>
+    <a asp-area="" asp-controller="Tutores" class="text-dec"><i class="fas fa-plus"></i> Inscribir estudiante</a>
 </p>
 
 <form asp-action="Index" method="get" class="form-inline alert alert-info" style="padding-bottom:4px;">
@@ -22,7 +26,7 @@
         <input type="submit" value="Buscar" class="btn btn-success btn-sm" />
     </div>
     <div class="form-group mx-sm-3 mb-2">
-        <a asp-action="Index">Volver a la lista completa</a>
+        <a asp-action="Index" class="text-dec">Volver a la lista completa</a>
     </div>
     <div class="form-group mx-sm-3 mb-2">
         <a class="btn btn-warning btn-sm"  asp-action="Retrasos" style="float: right">
@@ -39,10 +43,10 @@
                 Matrícula
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NomParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Nombre</a>
+                <a class="text-dec" asp-action="Index" asp-route-sortOrder="@ViewData["NomParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Nombre</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ApPatParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Apellido Paterno</a>
+                <a class="text-dec" asp-action="Index" asp-route-sortOrder="@ViewData["ApPatParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Apellido Paterno</a>
             </th>
             <th>
                 Apellido Materno
