@@ -5,7 +5,7 @@
 
 In progress:
 
-Web system, which allows speed up the different processes managed by the Rafael Reyes Spíndola Institute.
+Web system, which allows speeding up the different processes managed by the Rafael Reyes Spíndola Institute.
 
 ![Home](https://user-images.githubusercontent.com/49338963/170813157-0add6ccd-d98a-4f4a-b521-b0dbd12bc2d8.png)
 
